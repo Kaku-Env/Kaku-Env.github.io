@@ -15,6 +15,15 @@ a {
 iframe {
     width: 100%;
 }
+form {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+image {
+    width: 100%;
+    height: 100%;
+}
 
 /* HEADER
 ============================================================================ */
@@ -25,19 +34,30 @@ header {
     justify-content: space-between;
 }
 .page-title {
-    margin-top: 4px;
+    margin-top: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 52px;
 }
 .main-nav {
-    margin-top: 14px;
     display: flex;
     text-transform: uppercase;
     list-style: none;
 }
 .main-nav li {
+    margin-top: 43px;
+    font-size: 16px;
     margin-left: 36px;
 }
 .main-nav a {
     color: inherit;
+}
+.search-form {
+    margin-left: 80px;
+}
+.search-form input{
+    margin-top: 36px;
+    height: 26px;
+    vertical-align: bottom;
 }
 
 /* BODY

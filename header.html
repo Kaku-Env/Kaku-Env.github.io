@@ -2,6 +2,11 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
     <link href="css/style.css" rel="stylesheet">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap"
+          rel="stylesheet">
 </head>
 
 <header class="wrapper">
@@ -10,6 +15,13 @@
         <ul class="main-nav">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
+            <form class="search-form" action="http://www.google.co.jp/search" method="get">
+                <input type="search" name="search" placeholder=""
+                       maxlength="14" style="background-color:#e6e6e6">
+                <input type="image" src="images/icons/search_FILL0_wght400_GRAD0_opsz24.png"
+                       width="24" style="background-color:#cdcdcd"
+                       vertical-align="bottom" alt="検索" value="検索">
+            </form>
         </ul>
     </nav>
 </header>
