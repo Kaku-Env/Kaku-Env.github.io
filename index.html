@@ -9,13 +9,53 @@
         <!-- CSS -->
         <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
         <link href="css/style.css" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script>
     </head>
     <body>
-        <iframe src="header.html" id="header" frameborder="0"></iframe><!-- /#header -->
+        <iframe src="header.html" id="header" frameborder="0">
+        </iframe><!-- /#header -->
         
-        <main class="wrapper">
+        <main class="main-contents wrapper">
+            <aside>
+                <iframe src="aside.html" id="aside" frameborder="0">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article>
+                <div class="cat-header">
+                    <h2 class="cat-title">最新の記事</h2>
+                    <a href="" class="show-all">≫ すべて見る</a>
+                    <!-- <p class="show-all">>> すべて見る</p> -->
+                </div>
+                <div class="grid">
+                    <a href="./articles/temp_article.html" class="topic" data-category="maya">
+                        <img src="./articles/2024_01/sumbnails/sample_02.png" alt="">
+                        <p class="tag">&ensp;Maya&ensp;</p>
+                        <p class="topic-title">Maya:ダミーテキスト</p>
+                        <p class="topic-date">2024/01/01</p>
+                    </a>
+                    <a href="./articles/temp_article.html" class="topic" data-category="maya">
+                        <img src="./articles/2024_01/sumbnails/sample_02.png" alt="">
+                        <p class="tag">&ensp;Maya&ensp;</p>
+                        <p class="topic-title">Maya:ダミーテキスト</p>
+                        <p class="topic-date">2024/01/01</p>
+                    </a>
+                    <a href="./articles/temp_article.html" class="topic" data-category="maya">
+                        <img src="./articles/2024_01/sumbnails/sample_02.png" alt="">
+                        <p class="tag">&ensp;Maya&ensp;</p>
+                        <p class="topic-title">Maya:ダミーテキスト</p>
+                        <p class="topic-date">2024/01/01</p>
+                    </a>
+                </div><!-- /.grid -->
+            </article>
         </main>
         
-        <iframe src="footer.html" id="footer" frameborder="0"></iframe><!-- /#footer -->
+        <iframe src="footer.html" id="footer" frameborder="0">
+        </iframe><!-- /#footer -->
     </body>
 </html>
