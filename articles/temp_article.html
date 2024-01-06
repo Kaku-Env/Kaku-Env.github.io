@@ -11,28 +11,33 @@
         <link href="../css/style.css" rel="stylesheet">
     </head>
     <body>
-        <iframe src="../header.html" id="header" frameborder="0">
+        <iframe src="../header.html" id="header" frameborder="0" scrolling="no">
         </iframe><!-- /#header -->
         
         <main class="main-contents wrapper">
-            <aside>
-                <iframe src="../aside.html" id="aside" frameborder="0">
-                </iframe><!-- /#aside -->
+            <aside class="frame-article-left">
+                <p id="index-title">INDEX</p>
             </aside>
-            <article>
+            <article class="frame-article-middle">
                 <p class="tag">&ensp;Tag&ensp;</p>
                 <h1>メインタイトル</h1>
                 <p class="topic-date">yyyy/mm/dd</p>
                 <img class="big-image" src="2024_01/sumbnails/sample_02.png" alt="">
-                <p>サンプルテキストサンプルテキストサンプルテキスト</p>
-                <p>サンプルテキストサンプルテキストサンプルテキスト</p>
+
+                <p>サンプルテキストサンプルテキストサンプル｜｜ここまでが全角３８文字目＝＞｜
+                    サンプルテキストサンプルテキストサンプル｜｜ここまでが全角３８文字目＝＞｜
+                </p>
                 <h2>サブタイトル</h2>
                 <p>サンプルテキストサンプルテキストサンプルテキスト</p>
                 <p>サンプルテキストサンプルテキストサンプルテキスト</p>
             </article>
+            <aside class="frame-article-right">
+                <iframe src="../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
         </main>
         
-        <iframe src="../footer.html" id="footer" frameborder="0">
+        <iframe src="../footer.html" id="footer" frameborder="0" scrolling="no">
         </iframe><!-- /#footer -->
     </body>
 </html>

@@ -7,7 +7,7 @@
 /* COMMON
 ============================================================================ */
 html {
-    font-size: 100%;
+    font-size: 15px;
 }
 a {
     text-decoration:none;
@@ -67,16 +67,19 @@ header {
     vertical-align: bottom;
 }
 
+@media screen and (max-width: 1000px) {
+    .main-nav {
+        visibility: hidden;
+    }
+    .page-title a {
+        width: 100%;
+    }
+}
+
 /* BODY
 ============================================================================ */
 body {
     width: 100%;
-}
-article {
-    width: 79%;
-}
-aside {
-    width: 18%;
 }
 
 /* Home */
@@ -84,6 +87,12 @@ aside {
     display: flex;
     justify-content: space-between;
     margin-bottom: 50px;
+}
+.frame-index-left {
+    width: 18%;
+}
+.frame-index-right {
+    width: 79%;
 }
 .cat-header {
     display: flex;
@@ -140,20 +149,57 @@ aside {
 }
 
 /* Article */
+.frame-article-left {
+    width: 20%;
+}
+.frame-article-middle {
+    width: 50%;
+}
+.frame-article-right {
+    width: 20%;
+}
 .big-image {
+    margin: 40px 0 60px 0;
     width: 100%;
 }
+.frame-article-middle p {
+    line-height: 2rem;
+}
+.frame-article-middle h2 {
+    font-size: 1.6rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding: 5px 20px;
+    background-color: #ebebeb;
+}
+.index-title {
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1300px) {
+    .frame-article-right {
+        visibility: hidden;
+        width: 0%;
+    }
+    .frame-article-middle {
+        width: 70%;
+    }
+    .frame-article-left {
+        width: 25%;
+    }
+}
+
 
 /* FOOTER
 ============================================================================ */
 footer {
     width: 100%;
-    height: 100px;
-    background-color: #7ec59b;
+    /* display: flex; */
+    /* justify-content: space-between; */
+    background-color: #dadada;
     vertical-align: middle;
 }
 .footer-text {
     margin-top: 4px;
     text-align: center;
-    color: white;
 }
