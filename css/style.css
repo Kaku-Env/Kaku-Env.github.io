@@ -62,19 +62,64 @@ header {
     margin-left: 80px;
 }
 .search-form input{
-    margin-top: 36px;
+    margin-top: 32px;
     height: 26px;
     vertical-align: bottom;
 }
 
+/* Humberger menu */
+#hmbg-chbox {
+    display: none;
+}
+#hmbg-icon {
+    cursor: pointer;
+    align-self: center;
+}
+.hmbg-nav {
+    display: none;
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    margin-top: 14px;
+    background-color: white;
+}
+.hmbg-nav ul {
+    list-style: none;
+    text-transform: uppercase;
+}
+#hmbg-close {
+    display: none;
+}
+#hmbg-chbox:checked ~ .hmbg-nav {
+    display: flex;
+    animation: 1s fadeIn;
+}
+#hmbg-chbox:checked ~ #hmbg-icon #hmbg-open {
+    display: none;
+}
+#hmbg-chbox:checked ~ #hmbg-icon #hmbg-close {
+    display: block;
+}
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Responsive */
 @media screen and (max-width: 1000px) {
     .main-nav {
-        visibility: hidden;
+        display: none;
     }
     .page-title a {
         width: 100%;
     }
 }
+@media screen and (min-width: 1000px) {
+    #hmbg-icon {
+        visibility: hidden;
+    }
+}
+
 
 /* BODY
 ============================================================================ */
