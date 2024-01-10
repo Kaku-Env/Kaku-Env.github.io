@@ -9,6 +9,7 @@
 html {
     font-size: 15px;
     font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 400;
 }
 a {
     text-decoration:none;
@@ -196,10 +197,26 @@ body {
 
 /* Article */
 .frame-article-left {
-    width: 20%;
+    width: 15%;
+    height: auto;
+}
+#article-index {
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    top: 30px;
+}
+#article-index a {
+    font-weight: 400;
+    color: #1d1d1d;
+    line-height: 1.6rem;
+}
+#index-title {
+    margin-bottom: 10px;
 }
 .frame-article-middle {
-    width: 50%;
+    width: 55%;
+    margin-right: 20px;
 }
 .frame-article-right {
     width: 20%;
@@ -213,25 +230,27 @@ body {
 }
 .frame-article-middle h2 {
     font-size: 1.6rem;
-    margin-top: 40px;
-    margin-bottom: 20px;
     padding: 5px 20px;
+    margin: 80px 0 30px 0;
     background-color: #ebebeb;
 }
 .index-title {
     font-size: 1.5rem;
 }
+#article-index .current {
+    background: #f0f0f0;
+}
 
 @media screen and (max-width: 1300px) {
-    .frame-article-right {
+    .frame-article-left {
         visibility: hidden;
         width: 0%;
     }
     .frame-article-middle {
-        width: 70%;
+        width: 65%;
     }
-    .frame-article-left {
-        width: 25%;
+    .frame-article-right {
+        width: 20%;
     }
 }
 

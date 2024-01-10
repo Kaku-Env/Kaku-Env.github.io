@@ -15,14 +15,23 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script>
     </head>
-    <body>
+    <header>
         <iframe src="../../header.html" id="header" frameborder="0" scrolling="no">
         </iframe><!-- /#header -->
-        
+    </header>
+    <body>
         <main class="main-contents wrapper">
             <aside class="frame-article-left">
-                <p id="index-title">INDEX</p>
+                <iframe src="../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
             </aside>
             <article class="frame-article-middle">
                 <p class="tag">&ensp;Tag&ensp;</p>
@@ -33,17 +42,49 @@
                 <p>サンプルテキストサンプルテキストサンプル｜｜ここまでが全角３８文字目＝＞｜
                     サンプルテキストサンプルテキストサンプル｜｜ここまでが全角３８文字目＝＞｜
                 </p>
-                <h2>サブタイトル</h2>
+                <h2 id="title-01">サブタイトル1</h2>
                 <p>サンプルテキストサンプルテキストサンプルテキスト</p>
                 <p>サンプルテキストサンプルテキストサンプルテキスト</p>
+                <div style="margin-bottom: 500px;"></div>
+                <h2 id="title-02">サブタイトル2</h2>
+                <p>サンプルテキストサンプルテキストサンプルテキスト</p>
+                <p>サンプルテキストサンプルテキストサンプルテキスト</p>
+                <div style="margin-bottom: 500px;"></div>
+                <h2 id="title-03">サブタイトル3</h2>
+                <p>サンプルテキストサンプルテキストサンプルテキスト</p>
+                <p>サンプルテキストサンプルテキストサンプルテキスト</p>
+                <div style="margin-bottom: 500px;"></div>
             </article>
             <aside class="frame-article-right">
-                <iframe src="../../aside.html" id="aside" frameborder="0" scrolling="no">
-                </iframe><!-- /#aside -->
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01"> サブタイトル1</a>
+                    <a href="#title-02"> サブタイトル2</a>
+                    <a href="#title-03"> サブタイトル3</a>
+                </div>
+                <div style="height: auto;"></div>
             </aside>
         </main>
-        
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+        </script>
+    
+    <footer>
         <iframe src="../../footer.html" id="footer" frameborder="0" scrolling="no">
         </iframe><!-- /#footer -->
-    </body>
+    </footer>
 </html>
