@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Python - フォルダ構造を可視化しよう！ 第1回：osモジュールで再帰取得 - KM ENV TA BLOG</title>
+        <meta name="description" content="">
+        <meta name="keyword" content="python,初心者,学習,フォルダ,ファイル">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../../icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../../css/style.css" rel="stylesheet">
+        <!-- jQuery -->
+        <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script> -->
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;Python&ensp;</p>
+                <h1>Pythonでフォルダ構造を可視化しよう！<br>第1回：osモジュールで再帰取得</h1>
+                <p class="topic-date">2024/01/30</p>
+                <img class="big-image" src="./thumbnails/01.png" alt="">
+                <p>
+                    大量のフォルダの中から特定のファイルを探したいとき、フォルダを1つずつ開くのは面倒。。<br>
+                    ファイル名で検索をかけてパッと調べられる方法があれば…。なんて思ったことのある人は少なくないはず。<br>
+                    そんな人のために、Pythonを使ったフォルダ解析の方法をまとめていこうと思います。
+                </p>
+
+                <h2 id="title-01">フォルダ解析の方法</h2>
+                <p>Pythonでフォルダを解析する方法はいくつかあります。</p>
+                <ul>
+                    <li>osモジュールで再帰取得</li>
+                    <li>globモジュール</li>
+                    <li>os.walk</li>
+                </ul>
+                <p>このコラムでは例として、オープンソースソフトウェアのBlenderのファイル階層を解析しながら解説していきます。</p>
+
+                <h2 id="title-02">osモジュールで再帰的にファイルを取得</h2>
+                <p>
+                    まずは、osモジュールを使った方法です。<br><br>
+                    <code>os.listdir()</code> にディレクトリのパスを指定すると、ディレクトリ直下のファイル・フォルダの一覧がリストとして返ってきます。
+                </p>
+                <pre><code>import os
+
+root_path = r"C:\Program Files\Blender Foundation\Blender 3.6"
+
+items = os.listdir(root_path)
+print("\n".join(items))
+
+# >> 3.6                    <= フォルダ
+# >> blender-launcher.exe   <= ファイル
+# >> blender.crt
+# >> blender.exe ...
+
+print(type(items))
+# >> &lt;class 'list'&gt;
+                </code></pre>
+                <img src="../directory_analysis/images/01_explorer.png">
+                <p>
+                    ▲ 名前順にソートされるため、エクスプローラとは並び順が違う。<br><br>
+                    全てのフォルダ階層の一覧を調べるには、リストの要素がフォルダかどうかを判定し、これを再帰的に実行してあげれば可能です。<br><br>
+                    <code>os.path.isdir()</code> にパスを指定すると、フォルダだった場合のみTrueが返ってきます。<br>
+                    ファイルかどうかを判定するには、<code>os.path.isfile()</code> を使います。<br><br>
+                    (ちなみに、パスが存在しない場合はFalseが返ってきます。例外はスローしません。)
+                </p>
+                <pre><code>import os
+root_path = r"C:\Program Files\Blender Foundation\Blender 3.6"
+
+def list_items(path):
+    items = os.listdir(path)
+
+    for i in items:
+        item = os.path.join(path, i) # フルパスに戻す
+
+        if os.path.isfile(item):
+            # ファイルの場合
+            print("\t{}".format(i))
+        
+        elif os.path.isdir(item):
+            # フォルダの場合
+            print(i)
+            list_items(item) # 関数を再帰呼び出し
+        
+        else:
+            # パスが存在しない場合
+            print(None)
+    
+list_items(root_path)
+                </code></pre>
+                <p>▼ 出力結果</p>
+                <img src="./images/01_output.png">
+                <p>
+                    これでディレクトリの中身をすべてリストアップすることができました！<br><br>
+                    ただし、今のところファイルはインデントを一つ下げているだけで、階層の深さまでは分かりません。。<br><br>
+                    今回は、osモジュールの汎用的な関数を使ったやり方を解説しましたが、Pythonにはもっと便利な関数があります。<br>
+                    次回は、os.globモジュールを使った方法を解説したいと思います。
+                </p>
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01"> フォルダ解析の方法</a>
+                    <a href="#title-02"> osモジュールで再帰的にファイルを取得</a>
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+        
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+    </script>
+    
+    <footer>
+        <iframe src="../../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
