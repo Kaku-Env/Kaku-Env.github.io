@@ -1,6 +1,6 @@
 //single-contentを記事のクラスとし、記事内のh2、h3のみ取得
 const headingContents = document.querySelectorAll(
-    '.frame-article-middle h2, .frame-article-middle h3')
+    '.frame-article-middle h2')
 
 //各見出しの絶対位置
 let headingPos =  [...headingContents].map(
