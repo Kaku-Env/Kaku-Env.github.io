@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Substance Designer クイックスタートガイド 第1回：パッケージ・グラフ - KM ENV TA BLOG</title>
+        <meta name="description" content="">
+        <meta name="keyword" content="Substance Designer,初心者,学習,パッケージ,グラフ">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../../icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../../css/style.css" rel="stylesheet">
+        <!-- jQuery -->
+        <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script> -->
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;SubstanceDesigner&ensp;</p>
+                <h1>Substance Designer クイックスタートガイド<br>第1回：パッケージ・グラフ</h1>
+                <p class="topic-date">2024/02/01</p>
+                <img class="big-image" src="./thumbnails/01.png" alt="">
+                <p>
+                    SubstanceDesignerを勉強したいけど、何を勉強したらいいか分からない。。<br>
+                    公式のチュートリアルや書籍もいいけど、時間もお金もかけたくないんだよな。。<br><br>
+                    そんな人のために、最低限の知識をサクッと学べるコラムを書いていこうと思います。
+                </p>
+
+                <h2 id="title-01">概要</h2>
+                <p>
+                    このコラムでは、SustanceDesignerで自作のマテリアルを作成するのに必要な最低限の知識を解説していきます。<br><br>
+                    詳細な解説は公式チュートリアルやドキュメントにお任せするとして、「これさえ知っておけば大丈夫！」という状態を目指します。<br><br>
+                    (SubstanceDesigner バージョン13.1.0 を使用して解説します。)
+                </p>
+
+                <h2 id="title-02">大まかなワークフロー</h2>
+                <p>
+                    まず始めに、自作のマテリアルをSubstanceDesignerで書き出すまでの工程を解説します。<br><br>
+                    ざっくりと、工程は以下の通りです。
+                </p>
+                    <ul>
+                        <li>新規パッケージ・グラフを作る</li>
+                        <li>グラフを組む</li>
+                        <li>パッケージをsbsar形式で書き出す</li>
+                    </ul><br>
+                <p>以上！これだけです。</p>
+                
+                <h2 id="title-03">パッケージ・グラフとは</h2>
+                <p>まずは、パッケージ・グラフについて解説します。<br><br></p>
+                <h3>パッケージ</h3>
+                <p>
+                    SubstanceDesignerでは、マテリアルはパッケージ単位で書き出します。<br><br>
+                    パッケージは、複数のグラフを内包することができ、また画像などのリソースデータも格納することができます。<br>
+                    (パッケージをマテリアルとして書き出す際は、パッケージ内のリソースデータも格納されるため、参照切れを起こすことはありません。)<br><br>
+                    SubstanceDesignerのデータはsbsファイルという形式で保存しますが、sbsファイル = パッケージ という認識で問題ないです。<br><br>
+                </p>
+                <h3>グラフ</h3>
+                <p>
+                    グラフとは、複数のノードをまとめたものです。<br><br>
+                    グラフは、必ず1つ以上の「アウトプットノード」が配置されている必要があります。<br><br>
+                    実は、SubstanceDesignerには色んな種類のグラフがあり混同しやすいのですが、ここでいうグラフとは「コンポジショングラフ」のことです。<br>
+                    「テクスチャを生成するためのグラフなんだな」と思ってもらえれば大丈夫です。<br><br>
+                    ちなみに、他にもファンクショングラフやMDLグラフ、v13.0でひっそりと姿を消したモデルグラフなんてものもありますが、本コラムでは知っておく必要はありません。
+                </p>
+
+                <h2 id="title-04">パッケージ・グラフを作成する</h2>
+                <p>
+                    では、実際にパッケージ・グラフを作成する手順を解説します。<br><br>
+                    新規でグラフを作成するには、File > New > Substance graph を選択します。<br>
+                    (ショートカットは Ctrl+N です。)
+                </p>
+                <img src="./images/01_new_graph.png">
+                <p>選択すると、以下のようなダイアログが表示されます。</p>
+                <img src="./images/01_new_graph_menu.png">
+                <p>
+                    左側のペインには、グラフのテンプレートがデフォルトでいくつか用意されています。<br>
+                    テンプレートとは、アウトプットノードという出力テクスチャを指定するノードのセットがあらかじめ配置されているグラフのことです。<br><br>
+                    どのテンプレートを使用するかはレンダラーでどのテクスチャを使用するかによりますが、PBRマテリアルを作成する場合、通常は「Metallic Roughness」を使用すれば問題ありません。<br><br>
+                    次に、Graph Name の項目にグラフ名を入力します。<br>
+                    命名に迷った場合は、マテリアルとしてSubstance Painterのシェルフに表示される名前をつけておけば問題ないでしょう。<br><br>
+                    それ以外の設定は後から変更できますので、OKを選択します。
+                </p>
+                <img src="./images/01_created_graph.png">
+                <p>
+                    すると、エクスプローラービュー（画像左側）にパッケージに格納されたグラフが表示されます。<br>
+                    グラフビュー（画面右側）には、作成されたグラフの中身が表示されます。<br><br>
+                    グラフはパッケージに必ず格納されている必要があるので、この段階でパッケージも自動で作成されています。<br><br>
+                    アウトプットノードは、テンプレートで選択したものが配置されているはずです。<br>
+                    以降の工程では、最終出力結果のノードをそれぞれのアウトプットノードに接続していきます。<br><br>
+                </p>
+                <h3>パッケージの保存</h3>
+                <p>
+                    最後に、パッケージを保存します。<br><br>
+                    エクスプローラービューでパッケージを 右クリック > Save を選択、または、グラフを選択した状態で Ctrl+S を押します。
+                </p>
+                <img src="./images/01_save_package.png">
+                <p>すると、エクスプローラーが立ち上がるので、パッケージ名を入力してsbsファイルとして保存すれば完了です！</p>
+
+                <h2 id="title-05">まとめ</h2>
+                <p>
+                    というわけで、今回はパッケージ・グラフの概要、作り方を解説しました。<br><br>
+                    次回は、テクスチャを生成するグラフを組む、基本的なワークフローを解説したいと思います。
+                </p>
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01"> 概要</a>
+                    <a href="#title-02"> 大まかなワークフロー</a>
+                    <a href="#title-03"> パッケージ・グラフとは</a>
+                    <a href="#title-04"> パッケージ・グラフを作成する</a>
+                    <a href="#title-05"> まとめ</a>
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+        
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+    </script>
+    
+    <footer>
+        <iframe src="../../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
