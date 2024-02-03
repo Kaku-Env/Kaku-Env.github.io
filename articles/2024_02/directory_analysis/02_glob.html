@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Python - フォルダ構造を可視化しよう！ 第2回：globモジュール - KM ENV TA BLOG</title>
+        <meta name="description" content="前回は、osモジュールを使って再帰的にフォルダを検索する方法を解説しましたが、自前で関数を作らない方法もあります。
+        今回はglobモジュールを使った方法を解説していきます。">
+        <meta name="keyword" content="python,初心者,glob,フォルダ,ファイル">
+        <meta property="og:title" content="Python - フォルダ構造を可視化しよう！ 第1回：osモジュールで再帰取得 - KM ENV TA BLOG">
+        <meta property="og:description" content="前回は、osモジュールを使って再帰的にフォルダを検索する方法を解説しましたが、自前で関数を作らない方法もあります。
+        今回はglobモジュールを使った方法を解説していきます。">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="article">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io/articles/2024_02/directory_analysis/02_glob.html">
+        <meta property="og:image" content="https://kaku-env.github.io/articles/2024_02/directory_analysis/thumbnails/02_small.png">
+        <meta property="og:twitter:card" content="summary_large_image">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../../icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../../css/style.css" rel="stylesheet">
+        <!-- jQuery -->
+        <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script> -->
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;Python&ensp;</p>
+                <h1>Pythonでフォルダ構造を可視化しよう！<br>第2回：globモジュール</h1>
+                <p class="topic-date">2024/02/03</p>
+                <img class="big-image" src="./thumbnails/02.png" alt="">
+
+                <p>
+                    <a href="./01_os.html">前回</a> は、osモジュールを使って再帰的にフォルダを検索する方法を解説しましたが、自前で関数を作らない方法もあります。<br><br>
+                    今回はglobモジュールを使った方法を解説していきます。
+                </p>
+
+                <h2 id="title-01">globの使い方</h2>
+                <p><code>glob.glob()</code> は「パターン」を使ったファイルの検索ができます。</p>
+                <h3>パターンとは</h3>
+                <p>
+                    パターンとは、パス文字列に<code>*</code>, <code>?</code>, <code>[]</code> を挿入することで、特定のルールにマッチするパスを検索することができる特殊な文字のことです。<br><br>
+                    例えば、以下のパターンは「Blender 3.6」ディレクトリ直下の全てのフォルダ、ファイルにマッチします。
+                </p>
+                <pre><code>“C:\Program Files\Blender Foundation\Blender 3.6\*”</code></pre>
+                <p>特定のファイルだけにマッチしたい場合は、パターンの後に拡張子を付けます。</p>
+                <pre><code>“C:\Program Files\Blender Foundation\Blender 3.6\*.exe”</code></pre>
+                <p>直下のディレクトリだけでなく、全てのサブディレクトリにマッチしたい場合は <code>**</code> パターンを使います。</p>
+                <pre><code>“C:\Program Files\Blender Foundation\Blender 3.6\**”</code></pre>
+                <h3>glob.glob() の使い方</h3>
+                <p><code>glob.glob()</code> に <code>*</code> パターンで表現したパスを渡すことで、ディレクトリ直下の全てのフォルダ、ファイルのパスがリストとして返ってきます。</p>
+<pre><code>import glob
+
+root_path = r"C:\Program Files\Blender Foundation\Blender 3.6\*"
+
+items = glob.glob(root_path)
+
+print("\n".join(items))
+# >> C:\Program Files\Blender Foundation\Blender 3.6\3.6
+# >> C:\Program Files\Blender Foundation\Blender 3.6\blender-launcher.exe
+# >> C:\Program Files\Blender Foundation\Blender 3.6\blender.crt
+# ...
+
+print(type(items))
+# >> &lt;class 'list'&gt;
+</code></pre>
+                <p>全てのサブフォルダまで検索するには、<code>**</code> パターンを使い、引数を <code>recursive=True</code> にします。</p>
+<pre><code>root_path = r"C:\Program Files\Blender Foundation\Blender 3.6\*"
+print(len(glob.glob(root_path)))
+# >> 20
+
+root_path = r"C:\Program Files\Blender Foundation\Blender 3.6\**"
+print(len(glob.glob(root_path, recursive=True)))
+# >> 6321
+</code></pre>
+                <p>これだけで再帰的にディレクトリを検索できるのは便利ですね！</p>
+
+                <h2 id="title-02">glob.glob()の引数</h2>
+                <p><a href="https://docs.python.org/ja/3/library/glob.html" target="_blank">Pythonの公式ドキュメント</a> (執筆時点はv3.12.1) から、<code>glob.glob()</code> の引数を解説します。</p>
+                <p><code>glob.glob()</code> の引数は以下の通りです。</p>
+<pre><code>glob.glob(pathname, *, root_dir=None, dir_fd=None, recursive=False, include_hidden=False)</code></pre>
+                <h3>root_dir</h3>
+                <p>
+                    バージョン3.5で追加された引数。デフォルト値は<code>None</code> 。<br>
+                    公式ドキュメントには、以下のような解説があります。<br>
+                    <blockquote><p>
+                        root_dirが <code>None</code> でない場合、その値は検索のルートディレクトリを指定する path-like オブジェクトでなければなりません。<br>
+                        これは <code>glob()</code> を呼び出す前にカレントディレクトリを変更したのと同じ効果を持ちます。<br>
+                        pathname が相対パスの場合、戻り値のリストは root_dir からの相対パスを含むことになります。
+                    </p></blockquote>
+                    正直分かりづらいですが、要するに <code>root_dir</code> に指定したパスがカレントディレクトリになるということです。<br>
+                </p>
+<pre><code>glob.glob(r"C:\Program Files\Blender Foundation\Blender 3.6\*")
+
+# 以下と同義
+glob.glob("*", root_dir=r"C:\Program Files\Blender Foundation\Blender 3.6")</code></pre>
+                <h3>dir_fd</h3>
+                <p>
+                    こちらも、バージョン3.5で追加された引数。デフォルト値は<code>None</code> 。<br>
+                    公式ドキュメントの解説は、以下の通り。<br>
+                </p>
+                <blockquote><p>
+                    <strong>ディレクトリ記述子からの相対パス:</strong> dir_fd が <code>None</code> でない場合、その値はディレクトリを参照するファイル記述子である必要があり、また操作対象のファイルパスは相対パスである必要があります。<br>
+                    このときパスはファイル記述子が指すディレクトリからの相対パスと解釈されます。
+                    パスが絶対パスの場合、 dir_fd は無視されます。
+                </p></blockquote>
+                <p>
+                    インテリマウントをとられている気分です。<br>
+                    筆者もこの記事を書くために調べるまでは、この引数の存在すら知りませんでした。<br><br>
+                    調べたところ、ファイル記述子 (ファイルディスクリプタ) とは、osがディレクトリを識別するために付けられる整数のようです。<br>
+                    osによってはdir_fdをサポートしていないようで、<a href="https://docs.python.org/ja/3/library/os.html#os.supports_dir_fd" target="_blank">公式ドキュメント</a>によると、dir_fdはUnixでのみ動作するとのことです。<br><br>
+                    使用しているプラットフォームでdir_fdをサポートしているかを調べるには、<code>os.supports_dir_fd</code> オブジェクトに関数が含まれているかどうかで調べられるようです。
+                </p>
+<pre><code>glob.glob in os.supports_dir_fd
+# >> False (windowsの場合)
+</code></pre>
+                <h3>recursive</h3>
+                <p>
+                    デフォルト値は<code>False</code> 。<br>
+                    <code>True</code> にすることで、<code>**</code> パターンがすべてのサブディレクトリにマッチするようになります。
+                </p>
+                <h3>include_hidden</h3>
+                <p>
+                    バージョン3.11で追加された引数。デフォルト値は<code>False</code> 。<br>
+                    <code>True</code> にすることで、隠しディレクトリも検索に含めることができます。
+                </p>
+
+                <h2 id="title-03">まとめ</h2>
+                <p>
+                    今回は、globモジュールを使ってディレクトリを再帰的に解析する方法を解説しました。<br>
+                    使い方を知っておくだけでパッとディレクトリの構造を調べられるのは、非常に便利です。<br><br>
+                    次回は、<code>os.walk()</code> を使った方法を解説したいと思います。
+                </p>
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01"> globの使い方</a>
+                    <a href="#title-02"> glob.glob()の引数</a>
+                    <a href="#title-03"> まとめ</a>
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+        
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+    </script>
+    
+    <footer>
+        <iframe src="../../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
