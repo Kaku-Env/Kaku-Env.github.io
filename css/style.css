@@ -244,10 +244,14 @@ body {
 #article-index a {
     font-weight: 400;
     color: #1d1d1d;
-    line-height: 1.6rem;
+    line-height: 1.8rem;
+    padding-left: 10px;
 }
 #index-title {
-    margin-bottom: 10px;
+    margin-bottom: 1em;
+    padding: 0.6em 0;
+    border-bottom: #888888 1px solid;
+    padding-left: 10px;
 }
 .frame-article-middle {
     width: 55%;
@@ -284,7 +288,7 @@ body {
 }
 .frame-article-middle img {
     width: 100%;
-    margin-top: 10px;
+    margin: 10px 0 20px 0;
 }
 .index-title {
     font-size: 1.5rem;
