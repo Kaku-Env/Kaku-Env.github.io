@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Substance Designer クイックスタートガイド 第2回：ノード - KM ENV TA BLOG</title>
+        <meta name="description" content="前回は新規パッケージ・グラフを作る方法を解説しました。
+        今回は、SubstanceDesignerの主要な機能である、ノードについて解説していきます。">
+        <meta name="keyword" content="Substance Designer,初心者,学習,グラフ">
+        <meta property="og:title" content="Substance Designer クイックスタートガイド 第2回：ノード - KM ENV TA BLOG">
+        <meta property="og:description" content="前回は新規パッケージ・グラフを作る方法を解説しました。
+        今回は、SubstanceDesignerの主要な機能である、ノードについて解説していきます。">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="article">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io/articles/2024_02/substance_designer_basic/02_node.html">
+        <meta property="og:image" content="https://kaku-env.github.io/articles/2024_02/substance_designer_basic/thumbnails/02_small.png">
+        <meta property="og:twitter:card" content="summary_large_image">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../../icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../../css/style.css" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script>
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;SubstanceDesigner&ensp;</p>
+                <h1>Substance Designer クイックスタートガイド<br>第2回：ノード</h1>
+                <p class="topic-date">2024/02/04</p>
+                <img class="big-image" src="./thumbnails/02.png" alt="">
+                <p>
+                    <a href="./01_package_graph.html">前回</a> は新規パッケージ・グラフを作る方法を解説しました。<br>
+                    今回は、SubstanceDesignerの主要な機能である、ノードについて解説していきます。
+                </p>                
+                <h2 id="title-01">はじめに</h2>
+                このコラムでは、SubstanceDesignerの言語設定は「英語」で解説していきます。<br><br>
+                ある程度SubstanceDesignerを扱えるようになってくると、英語圏のチュートリアルを参考にすることも多く、ノード名などが日本語だと分かりづらくなるためです。<br><br>
+                (CG系のソフトは全般、初めから英語に慣れておくに越したことはないですね。)
+
+                <h2 id="title-02">ノードとは</h2>
+                <p>
+                    SubstanceDesignerでは、左→右 (上流→下流) へ <strong>ノード</strong> を接続してマテリアルを作成していきます。<br><br>
+                    ノードとは「入力」と「出力」を持った、特定の処理を行う機能のことです。<br>
+                </p>
+                <img src="./images/02_node_in_out.png">
+                <p>
+                    例えば、Blendノードは「2つの入力を受け取り、合成した結果を出力する」ノードです。<br>
+                    下の例では、加算モードで2つの画像を合成しています。
+                </p>
+                <img src="./images/02_blend_add_inputs.png">
+                <h3>プロパティ</h3>
+                <p>
+                    ノードは、<strong>パラメータ</strong> で挙動を制御することができます。<br><br>
+                    ノードをクリックすると、<strong>プロパティウィンドウ</strong> (画面右) にそのノードのプロパティが表示されます。<br>
+                    <code>Specific Parameters</code> の項目には、ノード固有のパラメータが用意されていて、値を変更することで、そのノードの挙動を制御することができます。<br><br>
+                    例えば、Blendノードには <code>Blending Mode</code> パラメータがあり、画像の合成モードを指定することができます。
+                </p>
+                <img src="./images/02_blend_properties.png">
+                <p>
+                    乗算やオーバーレイなど、Photoshopなどの画像合成ソフトではおなじみの合成モードが用意されています。<br><br>
+                    現在どのノードのプロパティが表示されているかは、グラフビューのノードの左上のプロパティアイコンから確認することができます。
+                </p>
+
+                <h2 id="title-03">ノードの使い方</h2>
+                <h3>ノードの追加</h3>
+                <p>
+                    グラフにノードを追加するには、グラフビューに上にマウスカーソルを移動し、<code>Spaceキー</code> を押します。<br>
+                    すると、ノードの一覧が表示されるので、使用するノードをクリックして配置します。<br>
+                </p>
+                <img src="./images/02_add_node_from_searchbox.gif">
+                <p>
+                    一覧に使用したいノードがない場合は、ノード名を検索バーに入力して検索するか、ライブラリウィンドウ (画面左側) から使用するノードをグラフビューにドラッグ&ドロップします。
+                </p>
+                <img src="./images/02_add_node_from_library.gif">
+                <h3>ノードの接続</h3>
+                <p>ノードを接続するには、ノードの出力ピンから次のノードの入力ピンにドラッグ＆ドロップしてコネクションを接続します。</p>
+                <img src="./images/02_edit_node_connection_01.gif">
+                <p>
+                    コネクションが赤い点線になっている場合は、何らかのエラーで処理できない状態になっています。<br>
+                    上の例では、ノードの「カラーモード」が違うためにエラーが出ています。<br><br>
+                    接続しているノードのピンを入れ替える場合は、<code>Shift</code> を押しながらピンをドラッグ＆ドロップします。<br>
+                    ノードの接続を解除するには、コネクションを選択した状態で<code>Delete</code> キーを押します。
+                </p>
+
+                <h2 id="title-04">まとめ</h2>
+                <p>
+                    今回は、ノードの基本的な概念・使い方を解説しました。<br>
+                    次回は、ノードを使って実際にグラフを組むワークフローについて解説したいと思います。
+                </p>
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01">はじめに</a>
+                    <a href="#title-02">ノードとは</a>
+                    <a href="#title-03">ノードの使い方</a>
+                    <a href="#title-04">まとめ</a>
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+        
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+    </script>
+    
+    <footer>
+        <iframe src="../../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
