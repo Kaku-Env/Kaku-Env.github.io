@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Substance Designer クイックスタートガイド 第3回：グラフ - KM ENV TA BLOG</title>
+        <meta name="description" content="前回は、SubstanceDesignerの主要な機能であるノードについて解説しました。
+        今回は、グラフについて少し掘り下げて解説していきます。">
+        <meta name="keyword" content="Substance Designer,初心者,学習,グラフ">
+        <meta property="og:title" content="Substance Designer クイックスタートガイド 第3回：グラフ - KM ENV TA BLOG">
+        <meta property="og:description" content="前回は、SubstanceDesignerの主要な機能であるノードについて解説しました。
+        今回は、グラフについて少し掘り下げて解説していきます。">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="article">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io/articles/2024_02/substance_designer_basic/03_graph.html">
+        <meta property="og:image" content="https://kaku-env.github.io/articles/2024_02/substance_designer_basic/thumbnails/03_small.png">
+        <meta property="og:twitter:card" content="summary_large_image">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../../icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../../css/style.css" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script>
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;SubstanceDesigner&ensp;</p>
+                <h1>Substance Designer クイックスタートガイド<br>第3回：グラフ</h1>
+                <p class="topic-date">2024/02/06</p>
+                <img class="big-image" src="./thumbnails/03.png" alt="">
+                <p>
+                    <a href="./02_node.html">前回</a> は、SubstanceDesignerの主要な機能であるノードについて解説しました。<br>
+                    今回は、グラフについて少し掘り下げて解説していきます。
+                </p>
+
+                <h2 id="title-01">インターフェース</h2>
+                <p>
+                    まず、インターフェースの概要について整理しておきます。<br>
+                    SubstanceDesignerには、以下のようなインターフェースがあります。
+                </p>
+                <img src="./images/03_interface.png">
+                <ol type="A">
+                    <li><strong>エクスプローラーパネル</strong> : パッケージやグラフ、リソースを管理することができます。</li>
+                    <li><strong>ライブラリパネル</strong> : デフォルトのコンテンツを検索、グラフに配置できます。</li>
+                    <li><strong>グラフビュー</strong> : グラフを編集するビューポート。</li>
+                    <li><strong>プロパティパネル</strong> : 選択されている要素のプロパティを参照、編集できます。</li>
+                    <li><strong>3Dビュー</strong> : PBRマテリアルの見た目を表示するビューポート。</li>
+                    <li><strong>2Dビュー</strong> : 選択されているノードのテクスチャを表示するビューポート。</li>
+                </ol>
+                
+                <h2 id="title-02">グラフの基本</h2>
+                <p>グラフビューでグラフの中身を編集するには、エクスプローラーパネルでグラフをダブルクリックします。</p>
+                <img src="./images/03_show_graph.gif">
+
+                <h3>グラフのプロパティ</h3>
+                <p>グラフのプロパティを表示するには、エクスプローラーパネルでグラフをクリックするか、グラフビューの何もないところをダブルクリックします。</p>
+                <img src="./images/03_show_graph_properties.gif">
+                <p>グラフには様々なプロパティがありますが、今回はその中でも主要なグラフのプロパティについて解説します。</p>
+
+                <h3>Identifier</h3>
+                <img src="./images/03_id_label.png">
+                <p>
+                    sbsファイル内でグラフを識別するためのIDです。<br>
+                    この項目を編集すると、エクスプローラービューでのグラフの表示名も更新されます。<br><br>
+                    IDには、使用できない記号もあるため注意してください。<br>
+                    半角スペースも使用できないため、自動で <code>_ (アンダースコア)</code> に変換されます。
+                </p>
+
+                <h3>Label</h3>
+                <p>
+                    グラフは、グラフ自身がノードとして別のグラフに配置することができますが、<code>Label</code> は配置された際にノード名として使用される名前です。<br>
+                    ラベルには半角スペースを使用することができます。
+                </p>
+                <img src="./images/03_graph_as_node.png">
+
+                <h3>Outputs</h3>
+                <img src="./images/03_output_properties.png">
+                <p>
+                    Outputsの項目には、グラフに配置されているアウトプットノードのプロパティが表示されます。<br><br>
+                    <code>Label</code> の項目で設定した名前が、グラフビュー上でのアウトプットノードの名前になります。<br><br>
+                    <code>Usage</code> の項目では、そのアウトプットノードが、マテリアルとして書き出した際にどのチャンネルとして使用されるかを指定することができます。<br>
+                    上の例では、アウトプットノードがbaseColorチャンネルとして使用されることが確認できます。
+                </p>
+
+                <h2 id="title-03">ペアレントサイズ</h2>
+                <p>ペアレントサイズとは、グラフのテクスチャ解像度のことです。</p>
+                <img src="./images/03_parent_size.png">
+                <p>
+                    グラフビュー右上の <code>Parent Size</code> のドロップダウンから変更することができます。<br><br>
+                    高すぎる解像度はパフォーマンスに影響を及ぼす可能性があるので、処理が重いと感じたら、作業中はペアレントサイズを落とすことを検討すると良いでしょう。<br><br>
+                    ちなみに、ノードベースで生成されたノイズなどのテクスチャは、ペアレントサイズを変更しても画像が劣化することはありません。
+                </p>
+
+                <h3>Relative to Parent</h3>
+                <p>ノードには、あらゆるノード共通の <code>Base Parameters</code> というパラメータがあります。</p>
+                <img src="./images/03_relative_to_parent.png">
+                <p>
+                    その中の <code>Output Size</code> は、ノードの解像度を指定するパラメータです。<br><br>
+                    あらゆるパラメータは、右上のアイコンから パラメータの <strong>継承モード</strong> を指定することができます。<br><br>
+                    継承モードが <code>Relative to Parent</code> の場合は、グラフの設定に対して <strong>相対的な</strong> 値となります。<br><br>
+                    例えば、上の例では Output Size が <code>Parent x 1</code> となっているため、グラフのペアレントサイズに対して、等倍のサイズになります。<br><br>
+                    継承モードが <code>Absolute</code> の場合は、値はグラフの設定に依存しない <strong>絶対的な</strong> 値となります。
+                </p>
+
+                <h2 id="title-04">まとめ</h2>
+                <p>
+                    今回は、グラフの概要・使い方について解説しました。<br><br>
+                    次回は、実際にマテリアルを作成する基本的なワークフローについて解説しようと思います。
+                </p>
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01">インターフェース</a>
+                    <a href="#title-02">グラフの基本</a>
+                    <a href="#title-03">ペアレントサイズ</a>
+                    <a href="#title-04">まとめ</a>
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+        
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+    </script>
+    
+    <footer>
+        <iframe src="../../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
