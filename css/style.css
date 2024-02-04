@@ -181,6 +181,8 @@ body {
 }
 .show-all {
     margin-left: auto;
+    text-decoration: none;
+    color: #2a2a2a;
 }
 .grid {
     display: grid;
@@ -192,7 +194,6 @@ body {
     width: 100%;
     height: 60%;
     object-fit: cover;
-    margin-bottom: 10px;
 }
 .grid a {
     text-decoration: none;
@@ -228,7 +229,10 @@ body {
     background-color: #0097b2;
     width: fit-content;
     border-radius: 2px;
+    margin-top: 10px;
 }
+
+/* Archives */
 
 /* Article */
 .frame-article-left {
@@ -310,6 +314,35 @@ body {
     }
 }
 
+/* PAGINATION
+============================================================================ */
+.pagination {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.clear-fix {
+    display: inline-flex;
+    justify-content: center;
+    list-style: none;
+}
+.clear-fix a, .prev-page button, .next-page button {
+    color: #0097b2;
+    border: #0097b2 1px solid;
+    padding: 5px;
+    margin: 0 5px;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+}
+.clear-fix a:hover,
+.prev-page button:hover,
+.next-page button:hover {
+    background: #0097b2;
+    color: white;
+}
 
 /* FOOTER
 ============================================================================ */
