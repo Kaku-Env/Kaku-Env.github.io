@@ -284,7 +284,8 @@ body {
     padding-bottom: 0.5rem;
     border-bottom: 1px gray solid;
 }
-.frame-article-middle ul {
+.frame-article-middle ul,
+.frame-article-middle ol {
     margin: 15px 40px;
     line-height: 2rem;
 }
