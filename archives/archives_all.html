@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>すべての記事 - KM ENV TA BLOG</title>
+        <meta name="description" content="すべての記事 - KM ENV TA BLOG">
+        <meta name="keyword" content="CG,情報サイト,背景,テクニカル">
+        <meta property="og:title" content="KM ENV TA BLOG">
+        <meta property="og:description" content="すべての記事 - KM ENV TA BLOG">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="website">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io">
+        <meta property="og:image" content="https://kaku-env.github.io/icon.ico">
+        <meta property="og:twitter:card" content="summary">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../icon.ico">
+        <link rel="shortcut icon" href="../icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../css/style.css" rel="stylesheet">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script>
+        <!-- js -->
+        <script type="text/javascript" src="../js/jquery.pagination.js"></script>
+    </head>
+    <header>
+        <iframe src="../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-index-left">
+                <iframe src="../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <div class="frame-index-right">
+                <div class="cat-header">
+                    <h2 class="cat-title">すべての記事</h2>
+                </div>
+                <div class="vertical-align">
+                    <div class="archive-items grid">
+                        <a href="../articles/2024_02/substance_designer_basic/02_node.html" class="topic archive-item">
+                            <img src="../articles/2024_02/substance_designer_basic/thumbnails/02_small.png">
+                            <p class="tag">&ensp;SubstanceDesigner&ensp;</p>
+                            <p class="topic-title">Substance Designer クイックスタートガイド &nbsp; 第2回：ノード</p>
+                            <p class="topic-date">2024/02/04</p>
+                        </a>
+                        <a href="../articles/2024_02/directory_analysis/02_glob.html" class="topic archive-item">
+                            <img src="../articles/2024_02/directory_analysis/thumbnails/02_small.png" alt="">
+                            <p class="tag">&ensp;Python&ensp;</p>
+                            <p class="topic-title">Pythonでフォルダ構造を可視化しよう！<br>
+                                第2回：globモジュール</p>
+                                <p class="topic-date">2024/02/03</p>
+                        </a>
+                        <a href="../articles/2024_02/substance_designer_basic/01_package_graph.html" class="topic archive-item">
+                            <img src="../articles/2024_02/substance_designer_basic/thumbnails/01_small.png" alt="">
+                            <p class="tag">&ensp;SubstanceDesigner&ensp;</p>
+                            <p class="topic-title">Substance Designer クイックスタートガイド &nbsp; 第1回：パッケージ・グラフ</p>
+                            <p class="topic-date">2024/02/01</p>
+                        </a>
+                        <a href="../articles/2024_02/directory_analysis/01_os.html" class="topic archive-item">
+                            <img src="../articles/2024_02/directory_analysis/thumbnails/01_small.png" alt="">
+                            <p class="tag">&ensp;Python&ensp;</p>
+                            <p class="topic-title">Pythonでフォルダ構造を可視化しよう！<br>
+                            第1回：osモジュールで再帰取得</p>
+                            <p class="topic-date">2024/01/30</p>
+                        </a>
+                    </div>
+                </div><!-- /.grid -->
+            </article>
+        </main>
+
+        <!-- Pagination -->
+        <script type="text/javascript">
+            $('.archive-items').pagination({
+                itemElement              : '> .archive-item',
+                paginationClassName      : 'pagination',
+                paginationInnerClassName : 'clear-fix',
+                displayItemCount         : 9
+            });
+        </script>
+    </body>
+    <footer>
+        <iframe src="../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
