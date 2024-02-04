@@ -232,8 +232,6 @@ body {
     margin-top: 10px;
 }
 
-/* Archives */
-
 /* Article */
 .frame-article-left {
     width: 15%;
@@ -312,6 +310,21 @@ body {
     .frame-article-right {
         width: 20%;
     }
+}
+
+/* ASIDE
+============================================================================ */
+.cat-title {
+    margin-bottom: 1em;
+    padding: 0.6em 0;
+    border-bottom: #888888 1px solid;
+}
+.categories a {
+    text-decoration: none;
+    color: inherit;
+}
+.categories a :hover {
+    background: #b3b3b3;
 }
 
 /* PAGINATION
