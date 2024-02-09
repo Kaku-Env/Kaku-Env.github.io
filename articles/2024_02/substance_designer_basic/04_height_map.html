@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Substance Designer クイックスタートガイド 第4回：ハイトマップ - KM ENV TA BLOG</title>
+        <meta name="description" content="前回は、グラフについて基本的な機能を解説しました。
+        今回は、マテリアルを作成するための下準備の手順と、マテリアルのベースとなる ハイトマップについて解説します。">
+        <meta name="keyword" content="Substance Designer,初心者,学習">
+        <meta property="og:title" content="Substance Designer クイックスタートガイド 第4回：ハイトマップ - KM ENV TA BLOG">
+        <meta property="og:description" content="前回は、グラフについて基本的な機能を解説しました。
+        今回は、マテリアルを作成するための下準備の手順と、マテリアルのベースとなる ハイトマップについて解説します。">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="article">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io/articles/2024_02/substance_designer_basic/04_height_map.html">
+        <meta property="og:image" content="https://kaku-env.github.io/articles/2024_02/substance_designer_basic/thumbnails/04_small.png">
+        <meta property="og:twitter:card" content="summary_large_image">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../../icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../../css/style.css" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script>
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;SubstanceDesigner&ensp;</p>
+                <h1>Substance Designer クイックスタートガイド<br>第4回：ハイトマップ</h1>
+                <p class="topic-date">2024/02/10</p>
+                <img class="big-image" src="./thumbnails/04.png" alt="">
+                <p>
+                    <a href="./03_graph.html">前回</a> は、グラフについて基本的な機能を解説しました。<br>
+                    今回は、マテリアルを作成するための下準備の手順と、マテリアルのベースとなる <strong>ハイトマップ</strong> について解説します。
+                </p>
+
+                <h2 id="title-01">ワークフロー</h2>
+                <p>
+                    PBRマテリアルを作成するには、最終的にベースカラー・ノーマル・AOなどのマップを作る必要があります。<br>
+                    ノードベースでそれらのテクスチャを作るには、上流の工程では一貫して「ハイトマップ」で作業するのが合理的です。<br><br>
+                    理想的なハイトマップが得られた段階で、ノードを用いてそれぞれの最終的なマップへと変換していきます。<br><br>
+                    以降では、簡単なマテリアルを作成しながら実際の工程を解説していきます。
+                </p>
+
+                <h2 id="title-02">3Dビュー設定</h2>
+                <p>
+                    まず、「Metallic Roughness」テンプレートを使用して新規グラフを作成します。<br><br>
+                    最初の工程では、これから作成するマテリアルを <strong>3Dビューで確認する設定</strong> を行います。<br><br>
+                    デフォルトでOutputノードに接続されているノードは、初期状態の見た目を適用させるためのものなので削除して構いません。<br>
+                    そして、<code>BaseMaterial</code> ノードをグラフに配置します。
+                </p>
+                <img src="./images/04_add_basematerial.gif">
+                <p>
+                    続いて、BaseMaterialノードの <strong>出力ピンを各Outputノードに接続</strong> していきますが、目視で接続していくのは少し手間です。<br>
+                    そこで、<code>マテリアルモード</code> という機能を活用します。
+                </p>
+
+                <h3>マテリアルモード</h3>
+                <img src="./images/04_material_mode.png">
+                <p>
+                    <code>コンパクトマテリアル</code> モードを使用することで、ノードの複数のチャンネルの出力ピンが、１つのコネクションに集約されます。<br>
+                    各マテリアルモードのショートカットは、キーボードの <code>1~3</code> に割り当てられています。<br><br>
+                    コンパクトマテリアルモードで、BaseMaterialノードの出力ピンを Outputノードにドラッグすると、各チャンネルへとコネクションが分岐します。<br><br>
+                </p>
+                <img src="./images/04_usage_property.png">
+                <p>出力のコネクションがどのOutputノードに接続されるかは、Outputノードの <code>Usage</code> プロパティの設定に依存します。</p>
+
+                <h3>3Dビューへのアサイン</h3>
+                <p>次に、BaseMaterialノードのマテリアルの見た目を、3Dビューで確認できるように設定します。<br></p>
+                <img src="./images/04_asign_to_3dview.gif">
+                <p>
+                    <strong>ノードを3Dビューのマテリアルにアサイン</strong> するには、ノードを3Dビューのモデル上に <code>右マウスボタンドラッグ</code> します。<br><br>
+                    これで、BaseMaterialノードの出力結果を、リアルタイムで3Dビューで確認できるようになりました。
+                </p>
+
+                <h2 id="title-03">ハイトマップの作成</h2>
+                <p>
+                    では、マテリアルの見た目を確認する下準備はできたので、ここからの工程では 実際にマップを作成していきます。<br><br>
+                    まずは、ベースとなる <strong>ハイトマップ</strong> について解説します。
+                </p>
+
+                <h3>ハイトマップとは</h3>
+                <p>
+                    ハイトマップ (HeightMap) とは、その名の通り<strong>「表面の凹凸の高さ」</strong>を表現するテクスチャです。<br>
+                    <code>0~1</code> のグレースケールで高さの情報を表し、起伏は <code>0(=黒)</code> が最も深く、<code>1(=白)</code> が最も高くなります。<br>
+                    中間値の <code>0.5(=グレー)</code> は高さのないフラットな表面を表します。<br><br>
+                    例えば、段ボールのような波打った表面をハイトマップで表現すると、以下のようになります。
+                </p>
+                <img src="./images/04_height_overview.png">
+                <p>このように、<strong>表面の起伏を横から見たグラフ</strong> のようにとらえると理解がしやすいでしょう。</p>
+
+                <h3 id="title-04">まとめ</h3>
+                <p>
+                    今回は、マテリアルを作成するための下準備の手順と、ハイトマップの概要について解説しました。<br>
+                    次回は、ハイトマップをベースに各マップを作成する手順と、マテリアルを書き出す方法を解説したいと思います。
+                </p>
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01">ワークフロー</a>
+                    <a href="#title-02">3Dビュー設定</a>
+                    <a href="#title-03">ハイトマップの作成</a>
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+        
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+    </script>
+    
+    <footer>
+        <iframe src="../../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
