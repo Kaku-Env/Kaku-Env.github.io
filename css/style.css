@@ -75,9 +75,10 @@ header {
     justify-content: space-between;
 }
 .page-title {
-    margin-top: 8px;
+    margin-top: 12px;
     font-family: 'Lato', sans-serif;
     font-size: 46px;
+    text-align: bottom;
 }
 .main-nav {
     display: flex;
@@ -159,6 +160,7 @@ header {
 ============================================================================ */
 body {
     width: 100%;
+    background: #f1f2f3;
 }
 
 
@@ -194,16 +196,19 @@ body {
     width: 100%;
     height: 60%;
     object-fit: cover;
+    border-radius: 3px;
 }
 .grid a {
     text-decoration: none;
     color: black;
+    background: #ffffff;
+    padding: 6px;
 }
 .topic {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 300px;
+    height: 330px;
     border: 1px solid #dcdcdc;
     padding-bottom: 2%;
     border-radius: 6px;
@@ -237,6 +242,17 @@ body {
     width: 15%;
     height: auto;
 }
+.frame-article-middle {
+    background: #ffffff;
+    width: 60%;
+    padding: 30px 50px 200px 50px;
+    margin-right: 20px;
+    margin-bottom: 300px;
+    border-radius: 5px;
+}
+.frame-article-right {
+    width: 20%;
+}
 #article-index {
     position: sticky;
     display: flex;
@@ -245,8 +261,8 @@ body {
 }
 #article-index a {
     font-weight: 400;
-    color: #1d1d1d;
-    line-height: 1.8rem;
+    color: #000000;
+    line-height: 2rem;
     padding-left: 10px;
 }
 #index-title {
@@ -254,14 +270,6 @@ body {
     padding: 0.6em 0;
     border-bottom: #888888 1px solid;
     padding-left: 10px;
-}
-.frame-article-middle {
-    width: 55%;
-    margin-right: 20px;
-    margin-bottom: 300px;
-}
-.frame-article-right {
-    width: 20%;
 }
 .big-image {
     margin: 40px 0 60px 0;
@@ -297,7 +305,7 @@ body {
     font-size: 1.5rem;
 }
 #article-index .current {
-    background: #f0f0f0;
+    background: #e0e3e5;
 }
 
 @media screen and (max-width: 1300px) {
@@ -364,11 +372,11 @@ footer {
     width: 100%;
     /* display: flex; */
     /* justify-content: space-between; */
-    background-color: #dadada;
+    /* background-color: #dadada; */
     vertical-align: middle;
     height: 100px;
 }
 .footer-text {
-    margin-top: 4px;
+    padding-top: 10px;
     text-align: center;
 }
