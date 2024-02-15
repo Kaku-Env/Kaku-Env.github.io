@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Substance Designer クイックスタートガイド 第5回：ノーマル・AOマップ - KM ENV TA BLOG</title>
+        <meta name="description" content="前回は、グラフについて基本的な機能を解説しました。
+        今回は、マテリアルを作成するための下準備の手順と、マテリアルのベースとなる ハイトマップについて解説します。">
+        <meta name="keyword" content="km env ta blog,Substance Designer,初心者,学習">
+        <meta property="og:title" content="Substance Designer クイックスタートガイド 第5回：ノーマル・AOマップ - KM ENV TA BLOG">
+        <meta property="og:description" content="前回は、グラフについて基本的な機能を解説しました。
+        今回は、マテリアルを作成するための下準備の手順と、マテリアルのベースとなる ハイトマップについて解説します。">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="article">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io/articles/2024_02/substance_designer_basic/04_height_map.html">
+        <meta property="og:image" content="https://kaku-env.github.io/articles/2024_02/substance_designer_basic/thumbnails/05_small.png">
+        <meta property="og:twitter:card" content="summary_large_image">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../../icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../../css/style.css" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script>
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;SubstanceDesigner&ensp;</p>
+                <h1>Substance Designer クイックスタートガイド<br>第5回：ノーマル・AOマップ</h1>
+                <p class="topic-date">2024/02/15</p>
+                <img class="big-image" src="./thumbnails/05.png" alt="">
+                <p>
+                    <a href="./04_height_map.html">前回</a> は、3Dビューの設定とハイトマップの概要について解説しました。<br>
+                    今回は、ハイトマップを作るうえで大切な画作りの理論と、ノーマル・AOマップの作り方について解説します。<br><br>
+                    今回は例として、<strong>「レンガ」</strong> のマテリアルを作ってみようと思います。
+                </p>
+
+                <h2 id="title-01">ディテールのレベル</h2>
+                <p>
+                    ハイトマップを作るにあたり、まずは画作りに大切な <strong>ディテール</strong> の考え方について解説します。<br>
+                    ディテールとは、<strong>物の形状の情報</strong> のことです。<br>
+                    例えば、石のディテールといえば、角の欠けた表情や、表面のでこぼこした凹凸のことを表します。<br><br>
+                    ハイトマップを作るにあたっては、大きさによって 以下のようにディテールを分類すると考えやすいです。
+                </p>
+                <img src="./images/05_detail_level.png">
+                <p>
+                    <strong>・ラージ (Large) ディテール</strong><br>
+                    遠くから見て分かる程度の、大まかな形状、起伏。<br>
+                    <strong>・ミディアム (Medium) ディテール</strong><br>
+                    ある程度近い距離から視認できる、中程度の表情。（エッジのベベルや面積の広い凹凸）<br>
+                    <strong>・スモール (Small) ディテール</strong><br>
+                    至近距離でやっと視認できる程度の、表面の細かい質感。<br><br><br>
+                    <strong>ラージ > ミディアム > スモール</strong> の順序で、より大きなディテールをつぶさないように気を付けます。<br><br>
+                    例えば、表面の細かいザラザラとした質感があまりに強いと、エッジの欠けた表情や、面の向きの微妙な違いといった情報が伝わりづらくなってしまいます。
+                </p>
+
+                <h2 id="title-02">ハイトマップの作成</h2>
+                <p>
+                    では実際に、ノードベースでハイトマップを作成する工程を解説していきます。<br><br>
+                    まずは、レンガの大まかな凹凸 (ラージディテール) を再現します。<br><br>
+                    今回は、レンガ状のパターンを作成するのに便利な <code>Brick1</code> というノードを配置します。
+                </p>
+                <img src="./images/05_brick1_node.png">
+                <p>
+                    そして、マテリアルにハイトマップを接続するために、<code>BaseMaterial</code> ノードの <code>User-Defined Maps</code> パラメータの <strong>Height</strong> のトグルを <strong>True</strong> にします。<br>
+                    すると、BaseMaterialノードのハイトマップを接続する入力ピンが表示されるので、Brick1ノードの出力のコネクションを接続します。<br><br>
+                    BaseMaterialノードによって補正されたハイトマップがアウトプットノードへと出力されますが、階調のしきい値やレベルは <code>Height Position</code> と <code>Height Range</code> パラメータで調整できます。
+                </p>
+
+                <h2 id="title-03">ノーマル・AOマップとは</h2>
+                <p>続いて、ハイトマップをもとに、<strong>ノーマル</strong>・<strong>アンビエントオクルージョン</strong> マップを作成します。</p>
+
+                <h3>Normal (法線) マップ</h3>
+                <p>
+                    ノーマルマップとは、<strong>面の向き (法線)</strong> の情報を、RGBチャンネルで表現したテクスチャです。<br>
+                    面のXYZ軸の法線の向きを、RGBチャンネルで表現します。<br><br>
+                    法線に変化のないフラットな面は、正面向き (Z軸・Bチャンネル) の成分が強いため、青紫のような色をしています。<br><br>
+                    ノーマルマップを作る上で気を付けなければいけないのは、<strong>1ピクセルに満たない法線の変化は見た目に影響しない</strong> ということです。
+                </p>
+                <img src="./images/05_normal_slope.png">
+                <p>
+                    あくまで光の反射によって表面の凹凸を表現しているだけなので、視差による物体の高低差を再現することはできません。<br><br>
+                    そのため、ディテールの強弱は、ノーマルマップのベベルの幅や後述の <strong>AO</strong> の強弱よって表現します。
+                </p>
+
+                <h3>Ambient Occlusion マップ</h3>
+                <p>
+                    アンビエントオクルージョン (AO) マップとは、<strong>環境光が遮られた空間の陰影</strong> を表現するテクスチャです。<br><br>
+                    例えば、指同士をくっつけるとわずかな暗い領域が現れるように、面同士が接近している箇所には光の届かないほのかな陰が発生します。<br><br>
+                    リアルタイムレンダリングでは、処理負荷を抑えながら物理的にリアルな光の反射を再現するために、しばしばAOマップが使用されます。
+                </p>
+
+                <h2 id="title-04">ノーマル・AOマップの作成</h2>
+                <p>
+                    SubstanceDesignerでハイトマップからノーマル・AOマップを作る手順は簡単です。<br><br>
+                    理想的なハイトマップが得られている場合には、<code>Normal</code>・<code>HBAO</code> ノードにハイトマップを入力するだけです。
+                </p>
+                <img src="./images/05_normal_AO_node.png">
+                <p>
+                    ただし、今回使用する Brick1 のように明暗の稜線がパキっとしているハイトマップでは、ノーマルマップに変換した際に法線が変化する領域が狭いために、ベベルの幅が狭くなりディテールが弱くなってしまいます。<br><br>
+                    そこで、今回はディテールを誇張するために <code>Bevel</code> ノードを使用します。
+                </p>
+                <img src="./images/05_bevel_node.png">
+                <p>
+                    Bevelノードの <code>Distance</code> パラメータを調整することで、明暗の境界線に直線的なグラデーションを加えることができます。<br><br>
+                    オレンジ色の出力ピンからは、ノーマルマップに変換されたテクスチャが出力されます。<br>
+                    (今回は、後々の工程でディテールを追加することを考慮して、出力されたハイトマップをNormalノードで変換します。)
+                </p>
+                <img src="./images/05_large_detail.png">
+                <p>
+                    最後に、BaseMaterialノードの<strong>ノーマル・AOマップの入力ピンを有効</strong> にして、各マップを接続します。<br><br>
+                    これで、ノーマル・AOマップがマテリアルに適用され、Outputノードへと出力されます。
+                </p>
+
+                <h3 id="title-05">まとめ</h3>
+                <p>
+                    今回は、画作りに大切なディテールの理論と、ノーマル・AOマップについて解説しました。<br><br>
+                    次回はいよいよパッケージをマテリアルとして書き出すまでの工程を解説しようと思います。
+                </p>
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01">ディテールのレベル</a>
+                    <a href="#title-02">ハイトマップの作成</a>
+                    <a href="#title-03">ノーマル・AOマップとは</a>
+                    <a href="#title-04">ノーマル・AOマップの作成</a>
+                    <a href="#title-05">まとめ</a>
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+        
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+    </script>
+    
+    <footer>
+        <iframe src="../../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>

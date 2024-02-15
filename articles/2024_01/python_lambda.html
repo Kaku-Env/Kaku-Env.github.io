@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Python - lambda(ラムダ式 無名関数)とは？ - KM ENV TA BLOG</title>
+        <meta name="description" content="">
+        <meta name="keyword" content="python,lambda,無名関数">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../css/style.css" rel="stylesheet">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script>
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;Python&ensp;</p>
+                <h1>lambda式とは？</h1>
+                <p class="topic-date">2024/01/dd</p>
+                <img class="big-image" src="" alt="Python lambda式とは?">
+
+                <h2 id="title-01">lambda(ラムダ)式とは</h2>
+                <p>
+                    lambdaは「無名関数」と呼ばれる、関数オブジェクトを生成することができる式のことです。<br><br>
+                    1行で関数が書けるため、戻り値や引数などに関数の戻り値を渡したい場合に、
+                    あらかじめ関数を定義することなく、直接記述することができます。
+                </p>
+                
+                <h2 id="title-02">文法</h2>
+                <p>lambda式は以下のように書きます。</p>
+                <pre><code class="python">lambda 引数: 戻り値
+                </code></pre>
+                <p>これを関数で書くと、以下のようになります。</p>
+                <pre><code class="python">
+def func(引数):
+    return 戻り値
+                </code></pre>
+                <p>
+                    ただし、lambdaは関数とは違い、関数名は名前空間に保存されません。<br>
+                    一時的に関数の戻り値を扱いたい場合に利用されます。
+                </p>
+
+                <h2 id="title-03">lambda式の具体的な使い方</h2>
+                <p>
+                    例えば、以下のような引数を2倍した値を返すような簡単な関数を定義したい場合、lambda式なら
+                    1行で書くことができます。
+                </p>
+                <pre><code class="python">
+# 関数の場合
+def double(x):
+    return x*2
+print(double(3))
+
+# lambdaの場合
+double = lambda x: x*2
+print(double(3))
+
+# >> 6
+                </code></pre>
+                <p>
+                    しかし、このようにlambda式を変数に格納する使い方はあまり使われず、
+                    PEP8でも非推奨とされています。<br><br>
+                    <blockquote>
+                        <p>代入文を使うと、ラムダ式が提供できる唯一の利点(つまり、大きな式に埋め込めること)を消してしまいます。</p>
+                        <cite>
+                            <a href="https://pep8-ja.readthedocs.io/ja/latest/index.html#id41" target="_blank">
+                                PEP8: プログラミングに関する注意事項
+                            </a>
+                        </cite>
+                    </blockquote><br>
+                    lambda式は、生成した関数オブジェクトを、他の関数やメソッドの引数に直接渡して使うのが
+                    基本的な使い方です。
+                </p>
+                <pre><code class="python">print(lambda x: x+1)
+                </code></pre>
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01"> lambda(ラムダ式)とは</a>
+                    <a href="#title-02"> 文法</a>
+                    <a href="#title-03"> lambda式の具体的な使い方</a>
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+        
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+        </script>
+    
+    <footer>
+        <iframe src="../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
