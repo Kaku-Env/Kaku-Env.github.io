@@ -5,7 +5,7 @@
         <title>APIの概要 - SubstanceDesigner PythonAPI大解読 - KM ENV TA BLOG</title>
         <meta name="description" content="SubstanceDesignerには、標準で組み込まれているPythonAPIがあります。
         しかし、参考になる情報源は公式ドキュメントかアプリケーションをインストールした時についてくるAPIリファレンスくらい…。
-        そこで、「リファレンスを片っ端から調べて記事を書こう」という企画をやろうと思い立ちました。">>
+        そこで、「リファレンスを片っ端から調べて記事を書こう」という企画をやろうと思い立ちました。">
         <meta property="og:title" content="APIの概要 - SubstanceDesigner PythonAPI大解読 - KM ENV TA BLOG">
         <meta property="og:description" content="SubstanceDesignerには、標準で組み込まれているPythonAPIがあります。
         しかし、参考になる情報源は公式ドキュメントかアプリケーションをインストールした時についてくるAPIリファレンスくらい…。
@@ -71,7 +71,25 @@
                     <code>sd.api.mdl</code> はおそらくシェーダー関連の機能だと思うので、CGデザイナーにとって使用頻度が高いであろう <code>sd.api.sbs</code> パッケージを優先して習熟するのが良さそうです。
                 </p>
 
-                <h2 id="title-02">まとめ</h2>
+                <h2 id="title-02">おまけ</h2>
+                <p>ちなみに、一番物量の多そうな <code>sd.api</code> パッケージ内のモジュールの数を調べてみました。</p>
+<pre><code>import os
+from glob import glob
+
+api_path = r"C:\Program Files\Adobe\Adobe Substance 3D Designer\resources\python\sd\api\*.py"
+mdl_path = r"C:\Program Files\Adobe\Adobe Substance 3D Designer\resources\python\sd\api\mdl\*.py"
+sbs_path = r"C:\Program Files\Adobe\Adobe Substance 3D Designer\resources\python\sd\api\sbs\*.py"
+
+print("api: {}".format(sum("__init__.py" not in i for i in glob(api_path))))
+print("mdl: {}".format(sum("__init__.py" not in i for i in glob(mdl_path))))
+print("sbs: {}".format(sum("__init__.py" not in i for i in glob(sbs_path))))
+
+# >> api: 107
+# >> mdl: 35
+# >> sbs: 9</code></pre>
+                <p>sd.apiパッケージだけで107個…。ワクワクしてきました。(白目)</p>
+
+                <h2 id="title-03">まとめ</h2>
                 <p>
                     今回は、これからAPIを習熟していくにあたり、まずはSubstanceDesigner PythonAPIのパッケージの構造を調査しました。<br><br>
                     次回以降から、各モジュールの機能をひとつずつ検証していこうと思います。
@@ -81,7 +99,8 @@
                 <div id="article-index">
                     <p id="index-title">IN THIS PAGE</p>
                     <a href="#title-01"> APIの概要</a>
-                    <a href="#title-02"> まとめ</a>
+                    <a href="#title-02"> おまけ</a>
+                    <a href="#title-03"> まとめ</a>
                 </div>
                 <div style="height: auto;"></div>
             </aside>
