@@ -98,29 +98,43 @@ print(len(diff))
 # >> 19</code></pre>
             <p>調べたところ、SDSBSCompGraph 固有のメソッドは <strong>19個</strong> という結果になりました。</p>
             <ul>
-                <li>setPropertyInheritanceMethod</li>
-                <li>deletePreset</li>
-                <li>setDefaultParentSize</li>
-                <li>reorderGraphInput</li>
-                <li>newPreset</li>
-                <li>getIcon</li>
-                <li>getUID</li>
-                <li>getExposedInSBSAR</li>
-                <li>reorderGraphOutput</li>
-                <li>setIcon</li>
                 <li>compute</li>
-                <li>getInputIdentifiers</li>
-                <li>getGraphType</li>
-                <li>getPreset</li>
-                <li>sNew</li>
+                <li>deletePreset</li>
                 <li>getDefaultParentSize</li>
-                <li>getPropertyInheritanceMethod</li>
-                <li>getPresets</li>
+                <li>getExposedInSBSAR</li>
+                <li>getGraphType</li>
+                <li>getIcon</li>
+                <li>getInputIdentifiers</li>
                 <li>getOutputIdentifiers</li>
+                <li>getPreset</li>
+                <li>getPresets</li>
+                <li>getPropertyInheritanceMethod</li>
+                <li>getUID</li>
+                <li>newPreset</li>
+                <li>reorderGraphInput</li>
+                <li>reorderGraphOutput</li>
+                <li>sNew</li>
+                <li>setDefaultParentSize</li>
+                <li>setIcon</li>
+                <li>setPropertyInheritanceMethod</li>
             </ul>
             <p>ひとまず、これらを優先して習熟していくこととします。</p>
 
-            <h2 id="title-04">setPropertyInheritanceMethod</h2>
+            <h2 id="title-04">compute</h2>
+            <h3>compute() → None</h3>
+            <p>
+                ノードの処理を再計算し、グラフ内のノードのテクスチャを更新するメソッドのようです。<br>
+                計算が完了するまで入力を受け付けなくなります。
+            </p>
+            
+            <h2 id="title-05">deletePreset</h2>
+            <h3>deletePreset(presetLabel: str) → None</h3>
+            <strong>Paremeters:</strong>
+            <ul><li><strong>presetLabel</strong> - The label of the preset to delete</li></ul><br>
+            <p>
+                指定したラベルのプリセットを削除するメソッドなんですね。<br><br>
+                ところで「プリセット」とは…？？？？
+            </p>
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
@@ -128,7 +142,8 @@ print(len(diff))
                     <a href="#title-01"> 概要</a>
                     <a href="#title-02"> カレントグラフの取得</a>
                     <a href="#title-03"> メソッドの概要</a>
-                    <a href="#title-04"> setPropertyInheritanceMethod</a>
+                    <a href="#title-04"> compute</a>
+                    <a href="#title-04"> deletePreset</a>
                 </div>
                 <div style="height: auto;"></div>
             </aside>
