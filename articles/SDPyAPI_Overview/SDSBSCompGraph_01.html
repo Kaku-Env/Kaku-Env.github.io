@@ -54,12 +54,81 @@
 
                 <h2 di="title-01">概要</h2>
                 <p>リファレンスによると、<strong>SDSBSCompGraph</strong> クラスは、<code>sd.api.sdgraph.SDGraph</code> クラスを継承しているようです。</p>
+                <img src="./images/SDSBSCompGraph/01_ref_class.jpg" style="border: #aaa 1px solid;">
+                
+                <h2 di="title-02">カレントグラフの取得</h2>
+                <p>公式のドキュメントによると、カレントグラフ（グラフビューで開いているグラフ）は、下記のように取得できるようです。</p>
+                <a href="https://helpx.adobe.com/substance-3d-designer/scripting/accessing-graphs-and-selections.html">Accessing graphs and selections | Substance 3D Designer</a>
+<pre><code>import sd
 
+ctx = sd.getContext()
+# -> sd.context.Context
+
+app = ctx.getSDApplication()
+# -> sd.api.sdapplication.SDApplication
+
+uiMgr = app.getQtForPythonUIMgr()
+# -> sd.api.qtforpythonuimgrwrapper.QtForPythonUIMgrWrapper
+
+c_graph = uiMgr.getCurrentGraph()
+# -> sd.api.sbs.sdsbscompgraph.SDSBSCompGraph
+
+print(c_graph.getIdentifier()) # >> my_graph</code></pre>
+
+                <h2 di="title-03">メソッドの概要</h2>
+                <p>
+                    では、クラスの規模を把握するために、メソッドの数を調べてみます。<br>
+                    <strong>SDGraph</strong> クラスを継承しているため、親クラスのメソッドとの差分を調べたほうがクラス固有の機能についての理解が深まりそうです。
+                </p>
+<pre><code>import inspect
+from sd.api.sbs.sdsbscompgraph import SDSBSCompGraph
+from sd.api.sdgraph import SDGraph
+
+# クラスのメソッドのリストを取得
+c_methods = [m for m in dir(SDSBSCompGraph)
+             if inspect.isfunction(eval("SDSBSCompGraph."+m))]
+
+g_methods = [m for m in dir(SDGraph)
+             if inspect.isfunction(eval("SDGraph."+m))]
+
+# 親クラスとの差分を取得
+diff = set(c_methods) ^ set(g_methods)
+
+print(len(diff))
+# >> 19</code></pre>
+            <p>調べたところ、SDSBSCompGraph 固有のメソッドは <strong>19個</strong> という結果になりました。</p>
+            <ul>
+                <li>setPropertyInheritanceMethod</li>
+                <li>deletePreset</li>
+                <li>setDefaultParentSize</li>
+                <li>reorderGraphInput</li>
+                <li>newPreset</li>
+                <li>getIcon</li>
+                <li>getUID</li>
+                <li>getExposedInSBSAR</li>
+                <li>reorderGraphOutput</li>
+                <li>setIcon</li>
+                <li>compute</li>
+                <li>getInputIdentifiers</li>
+                <li>getGraphType</li>
+                <li>getPreset</li>
+                <li>sNew</li>
+                <li>getDefaultParentSize</li>
+                <li>getPropertyInheritanceMethod</li>
+                <li>getPresets</li>
+                <li>getOutputIdentifiers</li>
+            </ul>
+            <p>ひとまず、これらを優先して習熟していくこととします。</p>
+
+            <h2 id="title-04">setPropertyInheritanceMethod</h2>
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
                     <p id="index-title">IN THIS PAGE</p>
                     <a href="#title-01"> 概要</a>
+                    <a href="#title-02"> カレントグラフの取得</a>
+                    <a href="#title-03"> メソッドの概要</a>
+                    <a href="#title-04"> setPropertyInheritanceMethod</a>
                 </div>
                 <div style="height: auto;"></div>
             </aside>
