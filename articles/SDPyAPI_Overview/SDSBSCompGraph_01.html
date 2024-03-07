@@ -41,7 +41,7 @@
                 <img class="big-image" src="./thumbnails/SDSBSCompGraph_01.jpg" alt="">
                 
                 <p>
-                    今回は、<code>sdsbscompgraph</code> モジュールを調べていこうと思います。<br>
+                    今回は、<strong>sdsbscompgraph</strong> モジュールを調べていこうと思います。<br>
                     (物量的に、記事は複数回に分かれると思います。)<br><br>
                     <strong>コンポジショングラフ（CompositionGraph）</strong> は、SubstanceDesignerの代表的なグラフで、テクスチャを生成するためのグラフです。<br>
                     他にもmdl・ファンクショングラフなどのグラフもあるため、それらと差別化するためにこんな名前がついています。
@@ -135,6 +135,59 @@ print(len(diff))
                 指定したラベルのプリセットを削除するメソッドなんですね。<br><br>
                 ところで「プリセット」とは…？？？？
             </p>
+
+            <h2 id="title-06">getPresets</h2>
+            <h3>getPresets()</h3>
+            <p>
+                グラフのプリセットを全て取得するメソッドです。<br><br>
+                この戻り値を調べれば、プリセットの正体を突き止められそうです。<br><br>
+                ドキュメントを漁ったところ、<strong>Parameter Preset</strong> という機能なのでは、という仮説が立ったので、以下のようにパラメータプリセットを作成した状態で検証してみました。
+            </p><br>
+            <a href="https://helpx.adobe.com/substance-3d-designer/substance-compositing-graphs/exposing-a-parameter/parameter-presets.html">Parameter presets | Substance 3D Designer</a>
+            <img src="./images/SDSBSCompGraph/01_preset_menu.jpg">
+<pre><code>c_graph = uiMgr.getCurrentGraph()
+
+presets = c_graph.getPresets()
+print(type(presets))
+# >> class 'sd.api.sdarray.SDArray'
+
+print(presets.getSize())
+# >> 1
+
+print(type(presets[0]))
+# >> class 'sd.api.sbs.sdsbscompgraphpreset.SDSBSCompGraphPreset'
+
+print(presets[0].getLabel())
+# >> Preset 01</code></pre>
+            <p>
+                プリセットの正体は、パラメータプリセットと見て間違いないようです！<br><br>
+                ちなみに、パラメータプリセットは、SubstancePainterのデフォルトのマテリアルにもある、これのことです。▼
+            </p>
+            <img src="./images/SDSBSCompGraph/01_sp_material_preset.jpg">
+
+            <h2 id="title-07">newPreset</h2>
+            <h3>newPreset(presetLabel: str) → sd.api.sbs.sdsbscompgraphpreset.SDSBSCompGraphPreset</h3>
+            <strong>Paremeters:</strong>
+            <ul><li><strong>presetLabel</strong> - The label of the preset to create</li></ul><br>
+            <p>
+                引数に指定したラベルで、新規パラメータプリセットを作成するメソッドです。<br><br>
+                戻り値として作成したパラメータプリセットのオブジェクトが返ってくるので、変数に保存しておけば色々な操作ができそうです。
+            </p>
+
+            <h2 id="title-08">getPreset</h2>
+            <h3>getPreset(presetLabel: str)</h3>
+            <strong>Paremeters:</strong>
+            <ul><li><strong>presetLabel</strong> - The label of the preset</li></ul><br>
+            <p>
+                引数に指定したラベルに該当するプリセットを返すメソッドです。<br><br>
+                該当するプリセットがない場合は、<code>None</code> 型が返ってきます。
+            </p>
+
+            <h2 id="title-09">まとめ</h2>
+            <p>
+                今回は、<strong>sdsbscompgraph</strong> モジュールについて、概要といくつかのメソッドについて調べてみました。<br><br>
+                次回以降もメソッドについて調べていこうと思います。
+            </p>
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
@@ -143,7 +196,11 @@ print(len(diff))
                     <a href="#title-02"> カレントグラフの取得</a>
                     <a href="#title-03"> メソッドの概要</a>
                     <a href="#title-04"> compute</a>
-                    <a href="#title-04"> deletePreset</a>
+                    <a href="#title-05"> deletePreset</a>
+                    <a href="#title-06"> getPresets</a>
+                    <a href="#title-07"> newPreset</a>
+                    <a href="#title-08"> getPreset</a>
+                    <a href="#title-09"> まとめ</a>
                 </div>
                 <div style="height: auto;"></div>
             </aside>
