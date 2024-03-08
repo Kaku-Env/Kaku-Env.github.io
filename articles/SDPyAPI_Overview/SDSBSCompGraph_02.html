@@ -40,6 +40,7 @@
                 <p class="topic-date">2024/03</p>
                 <img class="big-image" src="./thumbnails/SDSBSCompGraph_01.jpg" alt="">
                 
+                <p>今回も、引き続き <strong>SDSBSCompGraph</strong> クラスのメソッドについて調べていきます。</p>
                 <h3>実行環境</h3>
                 <ul>
                     <li>SubstanceDesignerバージョン：13.1.1</li>
@@ -47,12 +48,42 @@
                 </ul>
 
                 <h2 di="title-01">getDefaultParentSize</h2>
-                
+                <h3>getDefaultParentSize () → sd.api.sbbasetype.int2</h3>
+                <!-- <strong>Paremeters:</strong>
+                    <ul><li><strong>presetLabel</strong> - The label of the preset to delete</li></ul><br> -->
+                    <p>グラフのペアレントサイズを取得するメソッドです。</p>
+<pre><code>import sd
+
+ctx = sd.getContext()
+app = ctx.getSDApplication()
+uiMgr = app.getQtForPythonUIMgr()
+c_graph = uiMgr.getCurrentGraph()
+
+print(c_graph.getDefaultParentSize())
+# >> x: 1024, y: 1024</code></pre>
+                <p>「デフォルト」という用語に少し引っかかりましたが、ツールバーからペアレントサイズを変更して検証したところ、戻り値も同期していたので安心しました。</p>
+                <img src="./images/SDSBSCompGraph/02_parent_size_menu.jpg">
+                <p>
+                    あくまで、ノードのインスタンスパラメータと差別化するためにデフォルトと呼んでいるということなのでしょうね。<br><br>
+                    テクスチャを書き出すときの解像度の設定などに応用できそうです。<br>
+                    (Python組み込み型の <code>int</code> ではないので、取り扱い注意です。)
+                </p>
+
+                <h2 di="title-02">getExposedInSBSAR</h2>
+                <h3>getExposedInSBSAR () → bool</h3>
+                <!-- <strong>Paremeters:</strong>
+                <ul><li><strong>presetLabel</strong> - The label of the preset to delete</li></ul><br> -->
+                <p>
+                    パッケージを書き出す時に、SBSARファイルにグラフを書き出し対象として設定するかどうかのフラグを取得できます。<br>
+                    グラフのアトリビュートから設定可能です。▼
+                </p>
+                <img src="./images/SDSBSCompGraph/02_exposed_in_sbsar_menu.jpg">
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
                     <p id="index-title">IN THIS PAGE</p>
-                    <a href="#title-01"> </a>
+                    <a href="#title-01"> getDefaultParentSize</a>
+                    <a href="#title-01"> getExposedInSBSAR</a>
                 </div>
                 <div style="height: auto;"></div>
             </aside>
