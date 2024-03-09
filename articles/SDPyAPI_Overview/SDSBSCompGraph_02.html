@@ -49,9 +49,7 @@
 
                 <h2 di="title-01">getDefaultParentSize</h2>
                 <h3>getDefaultParentSize () → sd.api.sbbasetype.int2</h3>
-                <!-- <strong>Paremeters:</strong>
-                    <ul><li><strong>presetLabel</strong> - The label of the preset to delete</li></ul><br> -->
-                    <p>グラフのペアレントサイズを取得するメソッドです。</p>
+                <p>グラフのペアレントサイズを取得するメソッドです。</p>
 <pre><code>import sd
 
 ctx = sd.getContext()
@@ -71,19 +69,103 @@ print(c_graph.getDefaultParentSize())
 
                 <h2 di="title-02">getExposedInSBSAR</h2>
                 <h3>getExposedInSBSAR () → bool</h3>
-                <!-- <strong>Paremeters:</strong>
-                <ul><li><strong>presetLabel</strong> - The label of the preset to delete</li></ul><br> -->
                 <p>
                     パッケージを書き出す時に、SBSARファイルにグラフを書き出し対象として設定するかどうかのフラグを取得できます。<br>
                     グラフのアトリビュートから設定可能です。▼
                 </p>
                 <img src="./images/SDSBSCompGraph/02_exposed_in_sbsar_menu.jpg">
+
+                <h2 di="title-03">getGraphType</h2>
+                <h3>getGraphType () → str</h3>
+                <p>
+                    グラフタイプを取得するメソッドです。<br>
+                    グラフのアトリビュートから設定が可能です。▼
+                </p>
+                <img src="./images/SDSBSCompGraph/02_graph_type_menu.jpg">
+                <p>各グラフタイプに設定した時の、戻り値についても調査してみました。</p>
+<pre><code># Type                   Return
+# =============================================
+# Unspecified          : ""
+# Standard material    : "material"
+# Decal material       : "decal material"
+# Atlas material       : "atlas material"
+# Environment light    : "light"
+# Light texture        : "light texture"
+# Filter               : "filter"
+# Mesh based generator : "mesh based_generator"
+# Texture generator    : "texture_generator"</code></pre>
+
+                <h2 di="title-04">getIcon</h2>
+                <h3>getIcon ()</h3>
+                <p>
+                    リファレンスによると、グラフのアイコンを取得するメソッドのようです。<br>
+                    アイコンは、グラフのアトリビュートから設定が可能です。▼
+                </p>
+                <img src="./images/SDSBSCompGraph/02_graph_icon_menu.jpg">
+                <p>
+                    リファレンスには、戻り値の型が明示されていなかったので調査したところ、何もアイコンを設定していない場合は <code>None</code> 型が返ってきました。<br>
+                    アイコンが設定されている場合は、<code>sd.api.sdtexture.SDTexture</code> クラスのオブジェクトが返ってきます。
+                </p>
+
+                <h2 di="title-05">getInputIdentifiers</h2>
+                <h3>getInputIdentifiers ()</h3>
+                <p>
+                    リファレンスによると、グラフのインプットのIDのリストを取得するメソッドとのことです。<br>
+                    戻り値の型はリファレンスには明示されていませんでしたが、ソースコードを読んでみると、しっかりと型アノテーションが書かれていました。
+                </p>
+<pre><code class="python">def getInputIdentifiers(self) -> SDArray[SDValueString]:
+"""
+Get the list of graph input identifiers.
+
+"""</code></pre>
+                <p>
+                    下記の状態で検証してみたところ、リストの戻り値のサイズは <strong>3</strong> でした。<br>
+                    どうやら、インプットノードで追加したものは取得できるものの、グラフのアトリビュートから追加したものは取得できないようです。（ナゼ…？）
+                </p>
+                <img src="./images/SDSBSCompGraph/02_graph_input_menu.jpg">
+                <p>これは曲者すぎます。。いずれソースコードをしっかり読んでみるのがいいかもしれません。</p>
+
+                <h2 di="title-06">getOutputIdentifiers</h2>
+                <h3>getOutputIdentifiers ()</h3>
+                <p>
+                    アウトプットのIDのリストを取得するメソッドです。<br><br>
+                    検証してみたところ、想定通りの出力結果となりました。
+                </p>
+<pre><code>c_graph = uiMgr.getCurrentGraph()
+
+ids = c_graph.getOutputIdentifiers()
+
+print(type(ids[0]))
+# >> class 'sd.api.sdvaluestring.SDValueString'
+
+for i in ids:
+    print(i.get())
+
+# >>
+# basecolor
+# normal
+# roughness
+# metallic
+# height
+# ambientocclusion</code></pre>
+
+                <h2 di="title-07">まとめ</h2>
+                <p>
+                    今回も <strong>SDSBSCompGraph</strong> クラスのメソッドについて調べてみました。<br><br>
+                    やはり、リファレンスだけでは読み取れないデータの仕様は、地道に調べていかないと分かりませんね。。<br>
+                    こういう情報を資産として残しておくのって大事ですよね。開発に困ったときに大いに役立ちます。
+                </p>
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
                     <p id="index-title">IN THIS PAGE</p>
                     <a href="#title-01"> getDefaultParentSize</a>
-                    <a href="#title-01"> getExposedInSBSAR</a>
+                    <a href="#title-02"> getExposedInSBSAR</a>
+                    <a href="#title-03"> getGraphType</a>
+                    <a href="#title-04"> getIcon</a>
+                    <a href="#title-05"> getInputIdentifiers</a>
+                    <a href="#title-06"> getOutputIdentifiers</a>
+                    <a href="#title-07"> まとめ</a>
                 </div>
                 <div style="height: auto;"></div>
             </aside>
