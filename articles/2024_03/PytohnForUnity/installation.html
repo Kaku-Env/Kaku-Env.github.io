@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Python for Unity | インストール方法 - KM ENV TA BLOG</title>
+        <meta name="description" content="Unityのプラグインが自作できれば作業は捗るんだろうけど、C#は書けない。。
+        そんなジレンマにモヤモヤしている中、PythonでUnityのプラグイン開発ができるAPIがあると知り、調べてみることにしました。
+        今回は、Python for Unity のインストール方法について解説します。">
+        <meta property="og:title" content="Python for Unity | インストール方法 - KM ENV TA BLOG">
+        <meta property="og:description" content="Unityのプラグインが自作できれば作業は捗るんだろうけど、C#は書けない。。
+        そんなジレンマにモヤモヤしている中、PythonでUnityのプラグイン開発ができるAPIがあると知り、調べてみることにしました。
+        今回は、Python for Unity のインストール方法について解説します。">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="article">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io/articles/2024_03/PythonForUnity/installation.html">
+        <meta property="og:image" content="https://kaku-env.github.io/articles/2024_03/PythonForUnity/thumbnails">
+        <meta property="og:twitter:card" content="summary_large_image">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+
+        <!-- Favicon -->
+        <link rel="icon"  href="/icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../../css/style.css" rel="stylesheet">
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;Unity&ensp;</p>
+                <h1>Python for Unity<br>インストール方法</h1>
+                <p class="topic-date">2024/03</p>
+                <img class="big-image" src="" alt="">
+                
+                <p>
+                    Unityのプラグインが自作できれば作業は捗るんだろうけど、C#は書けない。。<br>
+                    そんなジレンマにモヤモヤしている中、<strong>PythonでUnityのプラグイン開発ができるAPI</strong> があると知り、調べてみることにしました。<br><br>
+                    今回は、<strong>Python for Unity</strong> のインストール方法について解説します。
+                </p>
+                <h2 id="title-01">調査の経緯</h2>
+                <p>
+                    筆者はUnityでのゲーム開発経験がありますが、特に <strong>背景CGデザイナーにとってインハウスのツールの需要は高い</strong> のではないかと感じました。<br>
+                    納品するデータの品質は高いに越したことはないけど、マンパワーで管理するのは非合理的かつ確実性に欠ける。。<br>
+                    かといって、プログラマーさんがそこまで完璧にデザイナーの意図を汲み取ってくれるのは期待できない…。<br>
+                    DCCツールのプラグイン開発経験があるデザイナーにとっては、<strong>使い慣れたPythonを活用</strong> できればかなりのシナジーが期待できます。
+                </p>
+
+                <h2 id="title-02">バージョン対応表</h2>
+                <p>
+                    <strong><a href="https://docs.unity3d.com/Packages/com.unity.scripting.python@7.0/manual/index.html">公式ドキュメント</a> </strong> から、バージョン対応表を下記にまとめました。(2024/3時点)
+                </p>
+                <table border="1">
+                    <tr>
+                        <th>Python for Unity</th>
+                        <th>Unity</th>
+                        <th>Python</th>
+                    </tr>
+                    <tr>
+                        <td>2.0.1 ~ 2.1.1</td>
+                        <td>2019.3~</td>
+                        <td>2.7.5</td>
+                    </tr>
+                    <tr>
+                        <td>4.0.0 ~ 6.0.1</td>
+                        <td>2020.2~<br>(推奨:2021.2~)</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>7.0.1</td>
+                        <td>2020.3~</td>
+                        <td>3.10.6</td>
+                    </tr>
+                </table>
+                
+                <p>本記事では、下記のバージョンを使用して解説します。</p>
+                <h3>動作環境</h3>
+                <ul>
+                    <li>Python for Unity：7.0.1</li>
+                    <li>Unity：2023.2.13f1</li>
+                </ul>
+
+                <h2 id="title-03">インストール方法</h2>
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01"> 調査の経緯</a>
+                    <a href="#title-02"> バージョン対応表</a>
+                    <a href="#title-03"> インストール方法</a>
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+        
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+    </script>
+    
+    <footer>
+        <iframe src="../../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
