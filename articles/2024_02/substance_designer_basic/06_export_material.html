@@ -16,7 +16,7 @@
         <meta property="og:twitter:site" content="@KmEnvTABlog">
 
         <!-- Favicon -->
-        <link rel="icon"  href="../../../icon.ico">
+        <link rel="icon"  href="/icon.ico">
         <!-- CSS -->
         <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
         <link href="../../../css/style.css" rel="stylesheet">
@@ -66,8 +66,29 @@
                 <img src="./images/06_random_height.jpg">
 
                 <h3>スモールディテール</h3>
+                <p>
+                    次に、至近距離から見たときに視認できる程度のディテールを追加していきます。<br>
+                    今回は、表面の <strong>ザラザラした質感（サーフェイスノイズ）</strong>を追加してみます。<br><br>
+                    こういった細かいノイズを加えたい場合、<code>Fractal Sum Base</code> ノードが便利です。<br><br>
+                    これをハイトマップに乗算でのせることでザラザラした質感を加えることができますが、そのままではコントラストが弱いです。<br><br>
+                    そのため、<code>Histgram Scan</code> ノードを間に挟み、コントラスト・レベルを調整します。
+                </p>
+                <img src="./images/06_small_detail.jpg">
+                <p>
+                    これまでの要領でディテールを加えていけば、よりリッチな見た目に近づけることができますが、本解説ではここまでとします。<br>
+                    ディテールを追加していくときは常に、<strong>ラージ・ミディアム・スモール</strong> のバランスを崩さないよう注意を払いましょう。
+                </p>
 
                 <h2 id="title-02">カラー・ラフネスマップの作成</h2>
+                <p>
+                    次に、作成したハイトマップをもとに、<strong>カラー・ラフネス</strong> マップを作成していきます。<br><br>
+                    ハイトマップからカラーマップを作成するには、<code>Gradient Map</code> ノードを使います。
+                </p>
+                <img src="./images/06_gradient_map.jpg">
+                <p>
+                    <strong>Gradient Map</strong> ノードは、グレースケールの入力をカラーに変換するノードです。<br>
+                    
+                </p>
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
