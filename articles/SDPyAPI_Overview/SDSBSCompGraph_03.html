@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>SDSBSCompGraph：#3 - SubstanceDesigner PythonAPI大解読 - KM ENV TA BLOG</title>
+        <meta name="description" content="今回も、引き続きSDSBSCompGraphクラスのメソッドについて調べていきます。
+        SDSBSCompGraphクラス固有のメソッドについては、今回で最後になる予定です。">
+        <meta property="og:title" content="SDSBSCompGraph：#3 - SubstanceDesigner PythonAPI大解読 - KM ENV TA BLOG">
+        <meta property="og:description" content="今回も、引き続きSDSBSCompGraphクラスのメソッドについて調べていきます。
+        SDSBSCompGraphクラス固有のメソッドについては、今回で最後になる予定です。">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="article">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io/articles/SDPyAPI_Overview/SDSBSCompGraph_03.html">
+        <meta property="og:image" content="https://kaku-env.github.io/articles/SDPyAPI_Overview/thumbnails/SDSBSCompGraph_03_small.jpg">
+        <meta property="og:twitter:card" content="summary_large_image">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+
+        <!-- Favicon -->
+        <link rel="icon"  href="/icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../css/style.css" rel="stylesheet">
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;SubstanceDesigner&ensp;</p>
+                <h1>SubstanceDesigner PythonAPI大解読<br>SDSBSCompGraph：#3</h1>
+                <p class="topic-date">2024/03</p>
+                <img class="big-image" src="./thumbnails/SDSBSCompGraph_03.jpg" alt="">
+                
+                <h2 id="title-01">getPropertyInheritanceMethod</h2>
+                <h3>getPropertyInheritanceMethod (sdProperty: sd.api.sdproperty.SDProperty) →<br>
+                    sd.api.sdproperty.SDPropertyInheritanceMethod</h3>
+                <strong>Paremeters:</strong>
+                <ul><li><strong>sdProperty</strong> - The property we want to query the inheritance method</li></ul><br>
+                <p>リファレンスによると、次のように説明があります。</p>
+                <img src="./images/SDSBSCompGraph/03_getpropertyIM_ref.jpg" style="border: gray 1px solid;">
+                <p>この説明だけではなんのこっちゃ分からないので、<strong>SDPropertyInheritanceMethod</strong> クラスのリファレンスも確認してみます。</p>
+                <img src="./images/SDSBSCompGraph/03_sdpropertyIM_ref.jpg" style="border: gray 1px solid;">
+                <p>む。なんだか見慣れた横文字がありますね。。</p>
+                <img src="./images/SDSBSCompGraph/03_inheritance_method_menu.jpg">
+                <p>
+                    これのことと見て間違いないでしょう。<br><br>
+                    ですが、引数に <code>SDProperty</code> クラスのオブジェクトを要求しているのが難儀です。。<br>
+                    おそらく、どのプロパティの継承モードを参照したいかを引数で指定するということなのでしょう。<br>
+                    検証するためには、<strong>グラフのプロパティのオブジェクト</strong> を取得する方法を調査せねばなりません。
+                </p>
+                <img src="./images/SDSBSCompGraph/03_IM_menu.jpg">
+                <p>このあたりはプラグインの開発経験から勘があるので、詳細は後のトピックで触れるとして、ひとまず検証してみます。</p>
+
+                <h2>まとめ</h2>
+                <p>
+                    今回で、<br><br>
+                    なんだか、こうして記事にまとめながら調べものをするのはとても合理的だなと思いました。<br>
+                    特に、「今何を調べようとしてたんだっけ…」みたいな <strong>思考の沼</strong> にハマるのは、こういう調べものには付き物です。
+                </p>
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01"> getPropertyInheritanceMethod</a>
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+        
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+    </script>
+    
+    <footer>
+        <iframe src="../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
