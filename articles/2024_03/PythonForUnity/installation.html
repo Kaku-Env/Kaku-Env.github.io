@@ -14,7 +14,7 @@
         <meta property="og:type" content="article">
         <meta property="og:locale" content="ja_JP">
         <meta property="og:url" content="https://kaku-env.github.io/articles/2024_03/PythonForUnity/installation.html">
-        <meta property="og:image" content="https://kaku-env.github.io/articles/2024_03/PythonForUnity/thumbnails">
+        <meta property="og:image" content="https://kaku-env.github.io/articles/2024_03/PythonForUnity/thumbnails/installation_small.jpg">
         <meta property="og:twitter:card" content="summary_large_image">
         <meta property="og:twitter:creator" content="@KmEnvTABlog">
         <meta property="og:twitter:site" content="@KmEnvTABlog">
@@ -41,8 +41,8 @@
             <article class="frame-article-middle">
                 <p class="tag">&ensp;Unity&ensp;</p>
                 <h1>Python for Unity<br>インストール方法</h1>
-                <p class="topic-date">2024/03</p>
-                <img class="big-image" src="" alt="">
+                <p class="topic-date">2024/03/12</p>
+                <img class="big-image" src="./thumbnails/installation.jpg" alt="">
                 
                 <p>
                     Unityのプラグインが自作できれば作業は捗るんだろうけど、C#は書けない。。<br>
@@ -111,10 +111,10 @@
                 <p>ウィンドウ下部のコンソールにスクリプトを入力し、<strong>Execute</strong> メニュー・または <strong>Ctrl+Enter</strong> でスクリプトを実行できます。</p>
 
                 <h2 id="#title-05">バージョンの確認</h2>
-                <p><strong>Edit > Project Settings</strong> の、<strong>Python for Unity</strong> の項目からバージョン情報を確認できます。</p>
+                <p><strong>Edit > Project Settings</strong> の、<strong>Python Scripting</strong> の項目からバージョン情報を確認できます。</p>
                 <img src="./images/installation_prj_settings_python_ver.jpg">
                 <p>
-                    ちなみに、Pythonはバンドルされたカスタムビルド版を使用しているとのことで、バージョンの変更はできないようです。<br><br>
+                    ちなみに、Pythonはバンドルされたカスタムビルド版を使用しているとのことで、他バージョンのPythonや仮想環境の使用はできないようです。<br><br>
                     インストールされたPythonのディレクトリは、<code>sys.path</code> で調べられます。<br>
                     本記事の環境では、以下のディレクトリにインストールされていました。<br><br>
                 </p>
@@ -122,11 +122,21 @@
 
                 <h2 id="#title-06">パッケージの検索パス</h2>
                 <p>
-                    検索パスに任意のパッケージパスを追加したい場合は、<strong>Project Settings > Python for Unity</strong> の <strong>Site Packages</strong> の項目から追加が可能です。<br>
+                    検索パスに任意のパッケージパスを追加したい場合は、<strong>Project Settings > Python Scripting</strong> の <strong>Site Packages</strong> の項目から追加が可能です。<br>
                     <code>sys.path</code> に指定したパスが追加されますが、適用にはUnityの再起動が必要です。
                 </p>
                 <img src="./images/installation_prj_settings_site_pkgs.jpg">
-                <p></p>
+
+                <h3>パッケージのインストール</h3>
+                <p>pipによる外部パッケージのインストールも可能で、下記のディレクトリにパッケージがインストールされます。</p>
+                <pre><code>[Unityプロジェクト階層]/Library/PyhtonInstall/Lib/site-packages</code></pre>
+
+                <h2 id="#title-07">まとめ</h2>
+                <p>
+                    今回は、UnityのPython拡張 <strong>Python for Unity</strong> の導入方法について解説しました。<br><br>
+                    PythonAPIでのプラグイン開発など、実際にどう活用できるかなどは、また追って調査したいと思います。
+                </p>
+                
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
@@ -137,6 +147,7 @@
                     <a href="#title-04"> スクリプトエディタの起動</a>
                     <a href="#title-05"> バージョンの確認</a>
                     <a href="#title-06"> パッケージの検索パス</a>
+                    <a href="#title-07"> まとめ</a>
                 </div>
                 <div style="height: auto;"></div>
             </aside>
