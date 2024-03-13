@@ -63,10 +63,74 @@
                     これのことと見て間違いないでしょう。<br><br>
                     ですが、引数に <code>SDProperty</code> クラスのオブジェクトを要求しているのが難儀です。。<br>
                     おそらく、どのプロパティの継承モードを参照したいかを引数で指定するということなのでしょう。<br>
-                    検証するためには、<strong>グラフのプロパティのオブジェクト</strong> を取得する方法を調査せねばなりません。
+                    検証するためには、<strong>グラフのプロパティのオブジェクト</strong> を取得せねばなりません。
                 </p>
                 <img src="./images/SDSBSCompGraph/03_IM_menu.jpg">
                 <p>このあたりはプラグインの開発経験から勘があるので、詳細は後のトピックで触れるとして、ひとまず検証してみます。</p>
+<pre><code>import sd
+from sd.api.sdproperty import SDPropertyCategory
+
+ctx = sd.getContext()
+app = ctx.getSDApplication()
+uiMgr = app.getQtForPythonUIMgr()
+c_graph = uiMgr.getCurrentGraph()
+
+# カレントグラフのinputプロパティを取得
+input_props = c_graph.getProperties(SDPropertyCategory.Input)
+for prop in input_props:
+    print(prop.getId())
+# >>
+# $outputsize
+# $format
+# $pixelsize
+# $pixelratio
+# $tiling
+# $randomseed
+
+# OutputSizeプロパティの継承モードを参照
+print(c_graph.getPropertyInheritanceMethod(input_props[0]))
+# >> SDPropertyInheritanceMethod.RelativeToParent</code></pre>
+                <p>
+                    <code>sd.api.sdproperty.SDPropertyInheritanceMethod</code> クラスのオブジェクトが返ってきました。<br>
+                    例えば、<strong>Relative to Parent</strong> になっていないプロパティをチェックするツールなどに応用できるかもしれませんね。
+                </p>
+
+                <h2 id="title-02">getUID</h2>
+                <h3>getUID () → str</h3>
+                <p>
+                    グラフのUID (グラフを識別するための重複なしの連番?) を取得するメソッドです。<br>
+                    UIDでグラフを参照するなどの用途で利用するのでしょうか。
+                </p>
+<pre><code>c_graph = uiMgr.getCurrentGraph()
+
+uid = c_graph.getUID()
+print(uid)
+# >> 1502332060
+print(type(uid))
+# >> class 'str'</code></pre>
+
+                <h2 id="title-03">reorderGraphInput</h2>
+                <h3>reorderGraphInput (inputIdentifier: str, newPosition: int) → None</h3>
+                <strong>Paremeters:</strong>
+                <ul>
+                    <li><strong>inputIdentifier</strong> - The Identifier of the input to reorder</li>
+                    <li><strong>newPosition</strong> - The position of the output</li>
+                </ul><br>
+                <p>
+                    グラフのインプットパラメータの並び順を操作するメソッドです。<br><br>
+                    インプットパラメータの順番は、グラフをノードとして他のグラフに配置した際の入力ピンの順番に影響するため、こういったメソッドが提供されているのはありがたいですね！
+                </p>
+                <img src="./images/SDSBSCompGraph/03_graph_input_order.jpg">
+                <p>
+                    第1引数に <strong>移動させるパラメータのID</strong>、第2引数に<strong>移動先の位置 (整数)</strong> を指定するようです。<br>
+                    移動先の位置は、<strong>0</strong> スタートです。
+                </p>
+<pre><code>c_graph = uiMgr.getCurrentGraph()
+
+# input_1 を一番先頭に移動
+c_graph.reorderGraphInput("input_1", 0)</code></pre>
+                <p>ただし、検証したところ、<strong>インプットノードで追加したパラメータ</strong> しか操作することができませんでした。。<br></p>
+                <img src="./images/SDSBSCompGraph/03_reorder_input_graph.jpg">
 
                 <h2>まとめ</h2>
                 <p>
