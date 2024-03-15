@@ -3,9 +3,11 @@
     <head>
         <meta charset="utf-8">
         <title>Substance Designer クイックスタートガイド 第6回：マテリアルのエクスポート - KM ENV TA BLOG</title>
-        <meta name="description" content="">
+        <meta name="description" content="前回は、画作りに大切なディテールの理論と、ノーマル・AOマップについて解説しました。
+        今回はいよいよパッケージをマテリアルとして書き出すまでの工程を解説しようと思います。">
         <meta property="og:title" content="Substance Designer クイックスタートガイド 第6回：マテリアルのエクスポート - KM ENV TA BLOG">
-        <meta property="og:description" content="">
+        <meta property="og:description" content="前回は、画作りに大切なディテールの理論と、ノーマル・AOマップについて解説しました。
+        今回はいよいよパッケージをマテリアルとして書き出すまでの工程を解説しようと思います。">
         <meta property="og:site_name" content="KM ENV TA BLOG">
         <meta property="og:type" content="article">
         <meta property="og:locale" content="ja_JP">
@@ -36,7 +38,7 @@
             <article class="frame-article-middle">
                 <p class="tag">&ensp;SubstanceDesigner&ensp;</p>
                 <h1>Substance Designer クイックスタートガイド<br>第6回：マテリアルのエクスポート</h1>
-                <p class="topic-date">2024/03/</p>
+                <p class="topic-date">2024/03/18</p>
                 <img class="big-image" src="./thumbnails/06.jpg" alt="">
                 <p>
                     <a href="./04_height_map.html">前回</a> は、画作りに大切なディテールの理論と、ノーマル・AOマップについて解説しました。<br>
@@ -107,7 +109,7 @@
                     Levelsノードのパラメータで <strong>階調を反転</strong> させている点に注目してください。<br><br>
                     ハイトマップをもとにラフネスマップを作成しているので、<strong>黒に近いほど物体の表面が奥まっている</strong> ということになりますよね。<br>
                     奥まっている部分ほど光沢を抑える、つまりラフネスマップでは階調を反転することで、凹凸を強調することができます。<br><br>
-                    このようなちょっとした工夫によって、特にゲームのようなリアルタイムレンダリングにおいては、カメラを回転した時の反射の情報によってルックを華やかに見せることができます。
+                    このようなちょっとした工夫によって、特にゲームのようなリアルタイムレンダリングにおいては、カメラを回転した時の反射の情報によってルックを魅力的に見せることができます。
                 </p>
 
                 <h2 id="title-03">マテリアルのエクスポート</h2>
@@ -131,7 +133,22 @@
                 <img src="./images/06_export_pkg_menu.jpg">
                 <p>すると、書き出し設定のダイアログが表示されるので、書き出し先のパスを設定して <strong>Publish</strong> を選択します。</p>
 
-                <h3>SubstancePainterへのインポート</h3>
+                <h2 id="title-04">SubstancePainterへのインポート</h2>
+                <p>sbsarファイルをSubstancePainterにインポートするには、アセットウィンドウ右下の <strong>+</strong> アイコンを選択します。</p>
+                <img src="./images/06_add_resource_shelf.jpg">
+                <img src="./images/06_add_resource_import_menu.jpg">
+                <p>
+                    インポート設定用のダイアログが表示されるので、<strong>Add Resource</strong> を選択し、エクスプローラーを表示します。<br>
+                    sbsarファイルを選択し <strong>Import</strong> をクリックすると、マテリアルがインポートされます。
+                </p>
+                <img src="./images/06_sp_material_preview.jpg">
+                <p>これで、作成したマテリアルをSubstancePainterにインポートすることができました！</p>
+
+                <h2 id="title-05">まとめ</h2>
+                <p>
+                    全6回にわたり、SubstanceDesignerでマテリアルを作成・書き出す工程を解説してきましたが、今回でこのシリーズは完結となります。<br><br>
+                    以降は、パラメータを制御してプロシージャルなマテリアルを生成するテクニックを解説したり、mdlグラフについても調査していきたいな、と考えています。
+                </p>
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
@@ -139,6 +156,8 @@
                     <a href="#title-01"> ディテールの追加</a>
                     <a href="#title-02"> カラー・ラフネスマップの作成</a>
                     <a href="#title-03"> マテリアルのエクスポート</a>
+                    <a href="#title-04"> SubstancePainterへのインポート</a>
+                    <a href="#title-05"> まとめ</a>
                 </div>
                 <div style="height: auto;"></div>
             </aside>
