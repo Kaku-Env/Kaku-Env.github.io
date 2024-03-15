@@ -80,22 +80,48 @@
                 </p>
 
                 <h2 id="title-02">カラー・ラフネスマップの作成</h2>
-                <p>
-                    次に、作成したハイトマップをもとに、<strong>カラー・ラフネス</strong> マップを作成していきます。<br><br>
-                    ハイトマップからカラーマップを作成するには、<code>Gradient Map</code> ノードを使います。
-                </p>
+                <p>次に、作成したハイトマップをもとに、<strong>カラー・ラフネス</strong> マップを作成していきます。</p>
+
+                <h3>カラーマップ</h3>
+                <p>ハイトマップからカラーマップを作成するには、<code>Gradient Map</code> ノードを使います。</p>
                 <img src="./images/06_gradient_map.jpg">
                 <p>
                     <strong>Gradient Map</strong> ノードは、グレースケールの入力をカラーに変換するノードです。<br>
                     出力の色を調整するには、グラフのプロパティから <strong>Gradient Editor</strong> を選択し、カラーピッカーを開きます。
                 </p>
                 <img src="./images/06_gradient_map_picker.jpg">
+                <p>スライダー上をクリックしてピンを追加し、カラーピッカーで色を指定することで、<strong>入力されたグレースケールの各ピクセルがカラーに再マッピング</strong> されます。</p>
+                <img src="./images/06_gradient_map_result.jpg">
+                <p>▲ <strong>Gradient Map</strong> でレンガの色味を再現してみました。</p>
+
+                <h3>ラフネスマップ</h3>
+                <p>
+                    <strong>ラフネスマップ</strong> とは、<strong>物体の光沢具合</strong> を再現するテクスチャです。<br>
+                    (この記事を読んでいる方にとっては釈迦に説法かもしれませんが。。)<br><br>
+                    <strong>黒（0）に近いほどツルツル、白（1）に近いほどザラザラ</strong> の見た目になります。<br>
+                    <strong>Roughness（粗さ）</strong> という名前から、<strong>1に近いほど粗くなる</strong> と考えると覚えやすいですね。
+                </p>
+                <img src="./images/06_roughness_level.jpg">
+                <p>今回は、<strong>Levels</strong> ノードで階調のしきい値を調整するだけで事足りました。</p>
+                <img src="./images/06_roughness_level_detail.jpg">
+                <p>
+                    Levelsノードのパラメータで <strong>階調を反転</strong> させている点に注目してください。<br><br>
+                    ハイトマップをもとにラフネスマップを作成しているので、<strong>黒に近いほど物体の表面が奥まっている</strong> ということになりますよね。<br>
+                    奥まっている部分ほど光沢を抑える、つまりラフネスマップでは階調を反転することで、凹凸を強調することができます。<br><br>
+                    このようなちょっとした工夫によって、特にゲームのようなリアルタイムレンダリングにおいては、カメラを回転した時の反射の情報によってルックを華やかに見せることができます。
+                </p>
+
+                <h2 id="title-03">マテリアルのエクスポート</h2>
+                <p>最後に、これまで作成したグラフを <strong>sbsarファイル</strong> として書き出します。</p>
+
+                <h3>sbsarファイル</h3>
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
                     <p id="index-title">IN THIS PAGE</p>
-                    <a href="#title-01">ディテールの追加</a>
-                    <a href="#title-02">カラー・ラフネスマップの作成</a>
+                    <a href="#title-01"> ディテールの追加</a>
+                    <a href="#title-02"> カラー・ラフネスマップの作成</a>
+                    <a href="#title-03"> マテリアルのエクスポート</a>
                 </div>
                 <div style="height: auto;"></div>
             </aside>
