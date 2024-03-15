@@ -96,8 +96,7 @@
 
                 <h3>ラフネスマップ</h3>
                 <p>
-                    <strong>ラフネスマップ</strong> とは、<strong>物体の光沢具合</strong> を再現するテクスチャです。<br>
-                    (この記事を読んでいる方にとっては釈迦に説法かもしれませんが。。)<br><br>
+                    <strong>ラフネスマップ</strong> とは、<strong>物体の光沢具合</strong> を再現するテクスチャです。<br><br>
                     <strong>黒（0）に近いほどツルツル、白（1）に近いほどザラザラ</strong> の見た目になります。<br>
                     <strong>Roughness（粗さ）</strong> という名前から、<strong>1に近いほど粗くなる</strong> と考えると覚えやすいですね。
                 </p>
@@ -115,6 +114,24 @@
                 <p>最後に、これまで作成したグラフを <strong>sbsarファイル</strong> として書き出します。</p>
 
                 <h3>sbsarファイル</h3>
+                <p>
+                    SubstanceDesignerのパッケージは <strong>.sbs</strong> という拡張子のファイルとして保存されます。<br><br>
+                    sbsファイルには、SubstanceDesignerのUIで表示するための様々なデータが格納されていますが、SubstancePainterなどの外部のアプリケーションでデータを扱うには不要です。<br><br>
+                    そのため、マテリアルを外部のアプリケーションにインポートするには、必要なデータのみに最適化した <strong>sbsarファイル</strong> として書き出します。
+                </p>
+                <img src="./images/06_designer-explorer-interop.png">
+                <a href="https://helpx.adobe.com/substance-3d-designer/interface/the-explorer-window/send-to-interoperability.html">https://helpx.adobe.com/substance-3d-designer/interface/the-explorer-window/send-to-interoperability.html</a>
+
+                <h3>sbsarファイルの書き出し</h3>
+                <p>
+                    sbsarファイルは、<strong>パッケージ単位</strong> で書き出されます。<br><br>
+                    sbsarファイルを書き出すには、<strong>パッケージを右クリック > Publish .sbsar file</strong> を選択します。
+                </p>
+                <img src="./images/06_export_pkg_explorer.jpg">
+                <img src="./images/06_export_pkg_menu.jpg">
+                <p>すると、書き出し設定のダイアログが表示されるので、書き出し先のパスを設定して <strong>Publish</strong> を選択します。</p>
+
+                <h3>SubstancePainterへのインポート</h3>
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
