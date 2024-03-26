@@ -114,7 +114,7 @@ print(type(uid))
                 <strong>Paremeters:</strong>
                 <ul>
                     <li><strong>inputIdentifier</strong> - The Identifier of the input to reorder</li>
-                    <li><strong>newPosition</strong> - The position of the output</li>
+                    <li><strong>newPosition</strong> - The position of the input</li>
                 </ul><br>
                 <p>
                     グラフのインプットパラメータの並び順を操作するメソッドです。<br><br>
@@ -132,17 +132,42 @@ c_graph.reorderGraphInput("input_1", 0)</code></pre>
                 <p>ただし、検証したところ、<strong>インプットノードで追加したパラメータ</strong> しか操作することができませんでした。。<br></p>
                 <img src="./images/SDSBSCompGraph/03_reorder_input_graph.jpg">
 
+                <h2 id="title-04">reorderGraphOutput</h2>
+                <h3>reorderGraphOutput (outputIdentifier: str, newPosition: int) → None</h3>
+                <strong>Paremeters:</strong>
+                <ul>
+                    <li><strong>outputIdentifier</strong> - The Identifier of the output to reorder</li>
+                    <li><strong>newPosition</strong> - The position of the output</li>
+                </ul><br>
+                <p>
+                    グラフのアウトプットパラメータの並び順を操作するメソッドです。<br><br>
+                    第1引数に <strong>移動させるパラメータのID</strong>、第2引数に<strong>移動先の位置 (整数)</strong> を指定します。
+                </p>
+<pre><code>c_graph = uiMgr.getCurrentGraph()
+
+# basecolorを2番目(0スタート)の位置に移動
+c_graph.reorderGraphOutput("basecolor", 1)</code></pre>
+
+                <h2 id="title-05">setDefaultParentSize</h2>
+                <h3>setDefaultParentSize (size: sd.api) → None</h3>
+                <strong>Paremeters:</strong>
+                <ul>
+                    <li><strong>outputIdentifier</strong> - The Identifier of the output to reorder</li>
+                    <li><strong>newPosition</strong> - The position of the output</li>
+                </ul><br>
+
                 <h2>まとめ</h2>
                 <p>
-                    今回で、<br><br>
-                    なんだか、こうして記事にまとめながら調べものをするのはとても合理的だなと思いました。<br>
-                    特に、「今何を調べようとしてたんだっけ…」みたいな <strong>思考の沼</strong> にハマるのは、こういう調べものには付き物です。
+                    今回で、<strong>SDSBSCompGraph</strong> クラスのメソッドの調査は完了です。<br><br>
                 </p>
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
                     <p id="index-title">IN THIS PAGE</p>
                     <a href="#title-01"> getPropertyInheritanceMethod</a>
+                    <a href="#title-02"> getUID</a>
+                    <a href="#title-03"> reorderGraphInput</a>
+                    <a href="#title-04"> reorderGraphOutput</a>
                 </div>
                 <div style="height: auto;"></div>
             </aside>
