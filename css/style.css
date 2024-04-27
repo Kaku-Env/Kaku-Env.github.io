@@ -342,7 +342,7 @@ body {
     border-bottom: #888888 1px solid;
 }
 .categories {
-    height: 100%;
+    padding-bottom: 50px;
 }
 .categories a {
     text-decoration: none;
