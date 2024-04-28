@@ -39,7 +39,7 @@
             <article class="frame-article-middle">
                 <p class="tag">&ensp;SubstanceDesigner&ensp;</p>
                 <h1>SubstanceDesigner PythonAPI大解読<br>SDSBSCompGraph：#3</h1>
-                <p class="topic-date">2024/03</p>
+                <p class="topic-date">2024/04/28</p>
                 <img class="big-image" src="./thumbnails/SDSBSCompGraph_03.jpg" alt="">
                 
                 <h3>実行環境</h3>
@@ -57,17 +57,19 @@
                 <img src="./images/SDSBSCompGraph/03_getpropertyIM_ref.jpg" style="border: gray 1px solid;">
                 <p>この説明だけではなんのこっちゃ分からないので、<strong>SDPropertyInheritanceMethod</strong> クラスのリファレンスも確認してみます。</p>
                 <img src="./images/SDSBSCompGraph/03_sdpropertyIM_ref.jpg" style="border: gray 1px solid;">
-                <p>む。なんだか見慣れた横文字がありますね。。</p>
+                <p>
+                    む。なんだか見慣れた横文字がありますね。。<br>
+                    プロパティの <strong>継承モード</strong> を参照する関数とみて間違いないでしょう。
+                </p>
                 <img src="./images/SDSBSCompGraph/03_inheritance_method_menu.jpg">
                 <p>
-                    これのことと見て間違いないでしょう。<br><br>
                     ですが、引数に <code>SDProperty</code> クラスのオブジェクトを要求しているのが難儀です。。<br>
                     おそらく、どのプロパティの継承モードを参照したいかを引数で指定するということなのでしょう。<br>
                     検証するためには、<strong>グラフのプロパティのオブジェクト</strong> を取得せねばなりません。
                 </p>
                 <img src="./images/SDSBSCompGraph/03_IM_menu.jpg">
                 <p>このあたりはプラグインの開発経験から勘があるので、詳細は後のトピックで触れるとして、ひとまず検証してみます。</p>
-<pre><code>import sd
+<pre><code class="language-python">import sd
 from sd.api.sdproperty import SDPropertyCategory
 
 ctx = sd.getContext()
@@ -95,7 +97,32 @@ print(c_graph.getPropertyInheritanceMethod(input_props[0]))
                     例えば、<strong>Relative to Parent</strong> になっていないプロパティをチェックするツールなどに応用できるかもしれませんね。
                 </p>
 
-                <h2 id="title-02">getUID</h2>
+                <h2 id="title-02">setPropertyInheritanceMethod</h2>
+                <h3>
+                    setPropertyInheritanceMethod (sdProperty: sd.api.sdproperty.SDProperty, inheritanceMethod: sd.api.sdproperty.SDPropertyInheritanceMethod)<br>
+                    → None
+                </h3>
+                <strong>Paremeters:</strong>
+                <ul>
+                    <li><strong>sdProperty</strong> - The property we want to set the inheritance method</li>
+                    <li><strong>inheritanceMethod</strong> - The inheritance method to set on the property</li>
+                </ul><br>
+                <p>こちらは、パラメータの継承モードを指定する関数です。</p>
+<pre><code class="language-python">from sd.api.sdproperty import SDPropertyCategory
+from sd.api.sdproperty import SDPropertyInheritanceMethod
+
+c_graph = uiMgr.getCurrentGraph()
+
+# カレントグラフの「OutputSize」パラメータのオブジェクトを取得
+p_output_size = c_graph.getPropertyFromId(
+    "$outputsize", SDPropertyCategory.Input)
+
+# OutputSizeの継承モードを「RelativeToInput」に指定
+c_graph.setPropertyInheritanceMethod(
+    p_output_size, SDPropertyInheritanceMethod.RelativeToInput)
+</code></pre>
+
+                <h2 id="title-03">getUID</h2>
                 <h3>getUID () → str</h3>
                 <p>
                     グラフのUID (グラフを識別するための重複なしの連番?) を取得するメソッドです。<br>
@@ -109,7 +136,7 @@ print(uid)
 print(type(uid))
 # >> class 'str'</code></pre>
 
-                <h2 id="title-03">reorderGraphInput</h2>
+                <h2 id="title-04">reorderGraphInput</h2>
                 <h3>reorderGraphInput (inputIdentifier: str, newPosition: int) → None</h3>
                 <strong>Paremeters:</strong>
                 <ul>
@@ -132,7 +159,7 @@ c_graph.reorderGraphInput("input_1", 0)</code></pre>
                 <p>ただし、検証したところ、<strong>インプットノードで追加したパラメータ</strong> しか操作することができませんでした。。<br></p>
                 <img src="./images/SDSBSCompGraph/03_reorder_input_graph.jpg">
 
-                <h2 id="title-04">reorderGraphOutput</h2>
+                <h2 id="title-05">reorderGraphOutput</h2>
                 <h3>reorderGraphOutput (outputIdentifier: str, newPosition: int) → None</h3>
                 <strong>Paremeters:</strong>
                 <ul>
@@ -148,26 +175,61 @@ c_graph.reorderGraphInput("input_1", 0)</code></pre>
 # basecolorを2番目(0スタート)の位置に移動
 c_graph.reorderGraphOutput("basecolor", 1)</code></pre>
 
-                <h2 id="title-05">setDefaultParentSize</h2>
-                <h3>setDefaultParentSize (size: sd.api) → None</h3>
+                <h2 id="title-06">setDefaultParentSize</h2>
+                <h3>setDefaultParentSize (size: sd.api.sdbasetype.int2) → None</h3>
                 <strong>Paremeters:</strong>
                 <ul>
                     <li><strong>outputIdentifier</strong> - The Identifier of the output to reorder</li>
                     <li><strong>newPosition</strong> - The position of the output</li>
                 </ul><br>
+                <p>
+                    <a href="/articles/SDPyAPI_Overview/SDSBSCompGraph_02.html/#title-01">前回の記事</a> で、グラフのペアレントサイズを取得する <strong>getDefaultParentSize</strong> を紹介しましたが、こちらはペアレントサイズを指定することができます。
+                </p>
+<pre><code class="language-python">c_graph = uiMgr.getCurrentGraph()
+
+parent_size = sd.api.sdbasetypes.int2()
+parent_size.x = 512
+parent_size.y = 512
+
+# カレントグラフのペアレントサイズを 512px*512px に指定
+c_graph.setDefaultParentSize(parent_size)
+</code></pre>
+
+                <h2 id="title-07">setIcon</h2>
+                <h3>setIcon(sdTexture: sd.api.sdtexture.SDTexture) → None</h3>
+                <strong>Paremeters:</strong>
+                <ul>
+                    <li><strong>identifier</strong> - The new resource identifier</li>
+                </ul><br>
+                <p>グラフのサムネイルアイコンを指定することができます。</p>
+<pre><code class="language-python">import sd
+from sd.api.sdtexture import SDTexture
+
+# ...
+c_graph = uiMgr.getCurrentGraph()
+
+# 画像ファイルからSDTextureインスタンスを作成
+tex = SDTexture.sFromFile("path_to_image_file")
+
+# カレントグラフのアイコンを指定
+c_graph.setIcon(tex)</code></pre>
 
                 <h2>まとめ</h2>
                 <p>
                     今回で、<strong>SDSBSCompGraph</strong> クラスのメソッドの調査は完了です。<br><br>
+                    よりグラフの理解を深めていくためには、親クラスの <strong>SDGraph</strong> についても調べていく必要がありそうです。
                 </p>
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
                     <p id="index-title">IN THIS PAGE</p>
                     <a href="#title-01"> getPropertyInheritanceMethod</a>
-                    <a href="#title-02"> getUID</a>
-                    <a href="#title-03"> reorderGraphInput</a>
-                    <a href="#title-04"> reorderGraphOutput</a>
+                    <a href="#title-02"> setPropertyInheritanceMethod</a>
+                    <a href="#title-03"> getUID</a>
+                    <a href="#title-04"> reorderGraphInput</a>
+                    <a href="#title-05"> reorderGraphOutput</a>
+                    <a href="#title-06"> setDefaultParentSize</a>
+                    <a href="#title-07"> setIcon</a>
                 </div>
                 <div style="height: auto;"></div>
             </aside>
