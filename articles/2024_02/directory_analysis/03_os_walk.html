@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Python - フォルダ構造を可視化しよう！ 第3回：os.walk - KM ENV TA BLOG</title>
+        <meta name="description" content="">
+        <meta name="keyword" content="python,初心者,glob,フォルダ,ファイル">
+        <meta property="og:title" content="Python - フォルダ構造を可視化しよう！ 第3回：os.walk - KM ENV TA BLOG">
+        <meta property="og:description" content="">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="article">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io/articles/2024_02/directory_analysis/03_os_walk.html">
+        <meta property="og:image" content="https://kaku-env.github.io/articles/2024_02/directory_analysis/thumbnails/03_small.png">
+        <meta property="og:twitter:card" content="summary_large_image">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../../icon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../../css/style.css" rel="stylesheet">
+        <!-- jQuery -->
+        <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script> -->
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;Python&ensp;</p>
+                <h1>Pythonでフォルダ構造を可視化しよう！<br>第3回：os.walk</h1>
+                <p class="topic-date">2024/04/29</p>
+                <img class="big-image" src="./thumbnails/03.png" alt="">
+
+                <p>
+                    Pythonでフォルダ階層の構造を可視化するための方法を解説する本コラム。<br>
+                    今回は <code>os.walk()</code> を使った方法を解説します。
+                </p>
+
+                <h3>実行環境</h3>
+                <ul>
+                    <li>Python：3.12.3</li>
+                </ul>
+
+                <h2 id="title-01">os.walk()</h2>
+                <p>
+                    <code>os.walk()</code> は <strong>Python3.3</strong> で追加された、ディレクトリツリーを再帰的に走査することができる関数です。
+                </p>
+                <ul><a href="https://docs.python.org/ja/3.12/library/os.html#os.walk" target="_blank">
+                    <li><strong>公式ドキュメント (Python 3.12.3) - os.walk()</strong></li>
+                </a></ul><br>
+                <p>
+                    引数にルートディレクトリのパスを指定することで、ディレクトリ階層を再帰的に走査します。<br><br>
+                    今回は、以下のようなディレクトリ階層を例に解説していきます。
+                </p>
+<pre><code class="language-plaintext">root
+│
+├─ topDir_01
+│  ├─ file_01.txt
+│  └─ file_02.txt
+│
+└─ topDir_02
+   └─ subDir_01
+      └─ file_03.txt</code></pre>
+                <p>実行すると、以下のように <code>(フォルダパス, フォルダ名, ファイル名)</code> の形式の <strong>タプル</strong> のリストが返ってきます。</p>
+<pre><code class="language-python">import os
+
+path = "C:\\root"
+
+for i in os.walk(path):
+    print(i)
+
+# >>>
+# ('C:\\root', ['topDir_01', 'topDir_02'], [])
+# ('C:\\root\\topDir_01', [], ['file_01.txt', 'file_02.txt'])
+# ('C:\\root\\topDir_02', ['subDir_01'], [])
+# ('C:\\root\\topDir_02\\subDir_01', [], ['file_03.txt'])</code></pre>
+                <p>
+                    <a href="./02_glob.html">前回の記事</a> で紹介した <code>glob.glob()</code> に比べ、ディレクトリに関する情報がタプルとして返ってくるため、ディレクトリの解析などの操作の柔軟性が高いのが特徴です。
+                </p>
+                <ul><a href="./02_glob.html" target="_blank">
+                    <li><strong>Pythonでフォルダ構造を可視化しよう！ 第2回：globモジュール - KM ENV TA BLOG</strong></li>
+                </a></ul><br>
+                
+                <h2 id="title-02">引数の解説</h2>
+                <h3>os.walk(top, topdown=True, onerror=None, followlinks=False)</h3>
+                <h3>top</h3>
+                <p>
+                    第一引数は、走査するルートディレクトリのパスを指定します。<br><br>
+                    バージョン3.6以降では、<code>pathlib</code> を使ったオブジェクトなどの <strong>path-like オブジェクト</strong> を受け入れるようになりました。
+                </p>
+                <ul><a href="https://docs.python.org/ja/3.12/glossary.html#term-path-like-object">
+                    <li><strong>公式ドキュメント (Python 3.12.3) - path-like object</strong></li>
+                </a></ul>
+
+                <h3>topdown=True</h3>
+                <p>
+                    オプション引数。<code>True</code> の場合、まずルートディレクトリ直下のディレクトリ・ファイルのタプルを生成し、その後サブディレクトリに潜ってタプルを生成し…というように、トップダウンでリストに展開していきます。<br>
+                    <code>False</code> の場合、一度すべてのサブディレクトリからタプルを生成した後、ボトムアップで走査してリストに展開します。<br><br>
+                    <code>True</code> の場合は、ループの途中（インプレース）でリストを変更（要素の追加、削除）して結果に反映することができます。<br>
+                    これにより、検索を省略したり、途中で変更したディレクトリ・ファイルを <code>os.walk()</code> に知らせることができます。<br>
+                    しかし、<code>False</code> の場合は、全てのディレクトリからタプルを生成した後リストに展開されるため、途中の変更は結果に反映されません。
+                </p>
+
+                <h3>onerror=None</h3>
+                <p>
+                    オプション引数。例外を送出した際に呼び出す関数を指定することができます。<br>
+                    エラーを報告して処理を継続したり、例外を送出して走査を中断する関数を実装し、ループの途中で呼び出すことが可能です。
+                </p>
+
+                <h3>followlinks=False</h3>
+                <p>
+                    オプション引数。ディレクトリへのシンボリックリンクをたどるかを指定することができます。<br>
+                    デフォルトは <code>False</code> で、例えばショートカットファイルがディレクトリに含まれていたとしても、そのリンク先のパスを走査しません。<br><br>
+                    <code>True</code> に指定すると、シンボリックリンクがルートディレクトリを指していた場合に、無限ループになることに注意してください。
+                </p>
+
+                <h2 id="title-03">ファイル一覧を取得する</h2>
+                <p>
+                    では、実際に <code>os.walk()</code> を使ったディレクトリ走査の方法を解説します。<br><br>
+                    まずは、ルートディレクトリ内のファイルの一覧を取得する方法です。<br><br>
+                    戻り値の <code>(フォルダパス, フォルダ名, ファイル名)</code> のタプルの中から、ファイル名だけを抽出すれば可能です。
+                </p>
+<pre><code class="language-python"># ルートディレクトリ内のファイル一覧を出力
+for root, dir, file in os.walk("C:\\root"):
+    if len(file): # リストが空でない場合
+        print("\n".join(file))
+
+# >>>
+# file_01.txt
+# file_02.txt
+# file_03.txt</code></pre>
+
+                <h2 id="title-04">ディレクトリ一覧を取得する</h2>
+                <p>
+                    続いて、ディレクトリの一覧を取得する方法です。<br><br>
+                    先ほどと同じく、タプルからディレクトリ名だけを抽出すれば可能です。
+                </p>
+
+<pre><code class="language-python"># ルートディレクトリ内のディレクトリ一覧を出力
+for root, dir, file in os.walk("C:\\root"):
+    if len(dir): # リストが空でない場合
+        print("\n".join(dir))
+
+# >>>
+# topDir_01
+# topDir_02
+# subDir_01</code></pre>
+
+                <h2 id="title-05">階層の深さを調べる</h2>
+                <p>
+                    ディレクトリの階層の深さを可視化できるか検証してみます。<br>
+                    これは、タプルの <code>ルートディレクトリ</code> 要素のパス区切り文字をカウントすれば可能です。<br><br>
+                    下記のコードでは検証として、階層の深さに応じてインデントを下げています。
+                </p>
+<pre><code class="language-python">import os
+
+print("C://root")
+# ルートディレクトリ内のディレクトリ一覧を出力
+for root, dir, file in os.walk("C:\\root"):
+    indent = "  " * (root.count(os.sep))
+
+    for d in dir:
+        print(indent + d)
+
+    for f in file:
+        print(indent + f)
+
+# >>>
+# C:/root
+#   topDir_01
+#   topDir_02
+#     file_01.txt
+#     file_02.txt
+#     subDir_01
+#       file_03.txt</code></pre>
+                <p><code>os.walk()</code> は、ルート直下のサブディレクトリをすべて走査した後、階層を一つ潜りサブディレクトリを走査し… という順序で処理するため、下記を見てわかる通りディレクトリ階層の構造を把握するには不向きです。</p>
+<pre><code class="language-plaintext">[出力結果]               [実際のディレクトリ階層]
+
+root                |   root
+  topDir_01         |     topDir_01
+  topDir_02         |       file_01.txt
+    file_01.txt     |       file_02.txt
+    file_02.txt     |     topDir_02
+    subDir_01       |       subDir_01
+      file_03.txt   |         file_03.txt</code></pre>
+
+                <h2 id="title-06">globとの比較</h2>
+                <p>ディレクトリの走査順を <code>glob.glob()</code> 比較してみます。</p>
+<pre><code class="language-python">import os
+from glob import glob
+
+print("C://root")
+for i in glob("C:\\root\\**", recursive=True):
+    indent = "  " * (i.count(os.sep))
+    print(indent + os.path.basename(i))
+
+# >>>
+# C:/root
+#   topDir_01
+#     file_01.txt
+#     file_02.txt
+#   topDir_02
+#     subDir_01
+#       file_03.txt</code></pre>
+                        <p>出力結果を見て分かるように、ディレクトリの階層構造を可視化するには <code>glob()</code> を使うのが適切なようです。</p>
+
+                        <h2 id="title-07">まとめ</h2>
+                        <p>
+                            今回は、<code>os.walk()</code> の使い方について解説しました。<br>
+                            本コラムの目的であるディレクトリ階層を可視化するには、<code>glob.glob()</code> を使用するのが、走査する順序的に便利です。<br><br>
+                            <code>os.walk()</code> は、ディレクトリのまとまった情報がタプルとして返ってくる利点を活かした用途では使い道がありそうです。<br>
+                        </p>
+
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01"> os.walk()</a>
+                    <a href="#title-02"> 引数の解説</a>
+                    <a href="#title-03"> ファイル一覧を取得する</a>
+                    <a href="#title-04"> ディレクトリ一覧を取得する</a>
+                    <a href="#title-05"> 階層の深さを調べる</a>
+                    <a href="#title-06"> globとの比較</a>
+                    <a href="#title-07"> まとめ</a>
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+        
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+    </script>
+    
+    <footer>
+        <iframe src="../../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
