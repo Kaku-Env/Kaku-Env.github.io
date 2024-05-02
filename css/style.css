@@ -236,6 +236,10 @@ body {
     border-radius: 6px;
     justify-self: center;
 }
+.topic-fix img {
+    width: 100%;
+    height: auto;
+}
 .topic-header {
     font-size: 1.2rem;
     color: #2a2a2a;
