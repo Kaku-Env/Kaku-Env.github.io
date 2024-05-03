@@ -93,9 +93,14 @@ for i in os.walk(path):
                 <p>
                     <a href="./02_glob.html">前回の記事</a> で紹介した <code>glob.glob()</code> に比べ、ディレクトリに関する情報がタプルとして返ってくるため、ディレクトリの解析などの操作の柔軟性が高いのが特徴です。
                 </p>
-                <ul><a href="./02_glob.html" target="_blank">
-                    <li><strong>Pythonでフォルダ構造を可視化しよう！ 第2回：globモジュール - KM ENV TA BLOG</strong></li>
-                </a></ul><br>
+                <div class="grid" style="margin-top: 120px;">
+                    <a href="/articles/2024_02/directory_analysis/02_glob.html" class="topic-fix">
+                        <p class="topic-header">← 前の記事</p>
+                        <img src="./02_small.png" alt="">
+                        <p class="tag">&ensp;Python&ensp;</p>
+                        <p class="topic-title">Pythonでフォルダ構造を可視化しよう！<br>第2回：globモジュール</p>
+                    </a>
+                </div>
                 
                 <h2 id="title-02">引数の解説</h2>
                 <h3>os.walk(top, topdown=True, onerror=None, followlinks=False)</h3>
@@ -218,15 +223,23 @@ for i in glob("C:\\root\\**", recursive=True):
 #   topDir_02
 #     subDir_01
 #       file_03.txt</code></pre>
-                        <p>出力結果を見て分かるように、ディレクトリの階層構造を可視化するには <code>glob()</code> を使うのが適切なようです。</p>
+                    <p>出力結果を見て分かるように、ディレクトリの階層構造を可視化するには <code>glob()</code> を使うのが適切なようです。</p>
 
-                        <h2 id="title-07">まとめ</h2>
-                        <p>
-                            今回は、<code>os.walk()</code> の使い方について解説しました。<br>
-                            本コラムの目的であるディレクトリ階層を可視化するには、<code>glob.glob()</code> を使用するのが、走査する順序的に便利です。<br><br>
-                            <code>os.walk()</code> は、ディレクトリのまとまった情報がタプルとして返ってくる利点を活かした用途では使い道がありそうです。<br>
-                        </p>
+                    <h2 id="title-07">まとめ</h2>
+                    <p>
+                        今回は、<code>os.walk()</code> の使い方について解説しました。<br>
+                        本コラムの目的であるディレクトリ階層を可視化するには、<code>glob.glob()</code> を使用するのが、走査する順序的に便利です。<br><br>
+                        <code>os.walk()</code> は、ディレクトリのまとまった情報がタプルとして返ってくる利点を活かした用途では使い道がありそうです。<br>
+                    </p>
 
+                    <div class="grid" style="margin-top: 120px;">
+                        <a href="/articles/2024_02/directory_analysis/02_glob.html" class="topic-fix">
+                            <p class="topic-header">← 前の記事</p>
+                            <img src="./02_small.png" alt="">
+                            <p class="tag">&ensp;Python&ensp;</p>
+                            <p class="topic-title">Pythonでフォルダ構造を可視化しよう！<br>第2回：globモジュール</p>
+                        </a>
+                    </div>
             </article>
             <aside class="frame-article-right">
                 <div id="article-index">
