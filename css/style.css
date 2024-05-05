@@ -78,6 +78,9 @@ td {
     display: flex;
     flex-direction: column;
 }
+ol li {
+    line-height: 2.5rem;
+}
 
 /* HEADER
 ============================================================================ */
@@ -362,14 +365,24 @@ body {
     border-bottom: #888888 1px solid;
 }
 .categories {
-    padding-bottom: 50px;
-}
-.categories a {
     text-decoration: none;
     color: inherit;
+    width: 100%;
+    padding: 3px;
 }
-.categories a :hover {
-    background: #b3b3b3;
+.categories-sub {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    padding: 3px 3px 3px 15px;
+}
+.categories:hover {
+    font-weight: 600;
+    background: #ebebeb;
+}
+.categories-sub:hover {
+    font-weight: 600;
+    background: #ebebeb;
 }
 
 /* PAGINATION
