@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="noindex">
+        <meta name="description" content="">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="article">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io/articles/">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../../../images/favicon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../../../css/style.css" rel="stylesheet">
+        <link href="../style.css" rel="stylesheet">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script>
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <h2>admin.analytics:read</h2>
+                <p>トークンタイプ：<code>User</code></p>
+                <p>互換性のあるAPIメソッド：<code>admin.analytics.getFile</code></p>
+                <hr>
+                <p>このスコープは、Enterprise Grid ワークスペースのメンバーに関する分析情報を返す <code>admin.analytics.getFile</code> API メソッドを使用するためのアクセス権をアプリに付与する。</p>
+                <p class="info">
+                    この <code>admin</code> スコープは OAuth V2 フローのバージョン 2 によって取得されるが、いくつかの追加要件がある。このスコープを要求するアプリは、Enterprise Grid 組織の管理者または所有者がインストールする必要がある。<br>
+                    また、アプリは個々のワークスペースではなく、組織全体にインストールする必要がある。 <br>
+                    詳細は以下を参照。
+                </p>
+                <p>
+                    アプリが組織管理者またはオーナーによってインストールされている場合、チャンネル管理設定を適切な権限に設定する必要がある。
+                    既に作成されているチャンネルを管理するには、トークンを更新して、（プライマリ組織オーナーだけに限らず）組織管理者またはオーナーの権限を有効にする必要がある。<br><br>
+                    Admin API のエンドポイントは、個々のワークスペースではなく、Enterprise Grid の組織全体に適用される。<br><br>
+                    トークンに管理者権限を付与するには、組織内のワークスペースだけでなく、Grid org 全体にアプリをインストールして取得する必要がある。<br><br>
+                    Enterprise Grid 組織で Admin API エンドポイントをサポートするアプリを設定およびインストールするには、以下の手順を実行する。：
+                </p>
+                <ol>
+                    <li><p>
+                        <a href="https://api.slack.com/apps">新しいSlackアプリを作成します。</a> アプリは標準的な <a href="https://api.slack.com/docs/oauth#flow">OAuth 2フロー</a> を処理できる必要があります。
+                    </p></li>
+                    <li><p>
+                        アプリの設定で、左のナビゲーションから <strong>OAuth & Permissions</strong> を選択します。<strong>Scopes</strong> というセクションまでスクロールし、必要な <code>admin.*</code> スコープを追加します。 緑色の <strong>変更を保存</strong> ボタンをクリックします。
+                    </p></li>
+                    <li><p>
+                        アプリの設定で、左のナビゲーションから「Manage Distribution」を選択します。 Share Your App with Other Workspaces（アプリを他のワークスペースと共有する）」というセクションで、4つのセクションすべてに緑色のチェックが入っていることを確認します。 次に、緑色の[Activate Public Distribution]ボタンをクリックします。
+                    </p></li>
+                    <li><p>
+                        Share Your App with Your Workspace セクションで、Sharable URL をコピーしてブラウザに貼り付 け、組織にアプリをインストールする OAuth ハンドシェイクを開始します。 アプリをインストールするには、Enterprise Grid 組織の管理者または所有者としてログインする必要があります。
+                    </p></li>
+                    <li><p>
+                        インストール画面の右上にあるドロップダウンをチェックして、組織内の個々のワークスペースではなく、組織にアプリをインストールしていることを確認してください。 下の画像を参照してください。
+                    </p></li>
+                    <li><p>
+                        アプリが OAuth フローを完了すると、組織の Admin API メソッドを呼び出すために使用できる OAuth トークンが付与されます。
+                    </p></li>
+                </ol>
+                <img src="https://a.slack-edge.com/80588/img/api/workspace-v-org-audit.png">
+                <p>Admin API エンドポイントを使用するアプリをインストールする場合は、組織内のワークスペース ではなく、必ずグリッド組織にインストールしてください。</p>
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01"> </a>
+                    
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+    
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+        </script>
+    
+    <footer>
+        <iframe src="../../../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>

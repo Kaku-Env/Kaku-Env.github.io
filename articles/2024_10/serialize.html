@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>オブジェクトのシリアライズ(直列化)とは</title>
+        <meta name="description" content="">
+        <meta property="og:title" content="オブジェクトのシリアライズ(直列化)とは - KM ENV TA BLOG">
+        <meta property="og:description" content="">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="article">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io/articles/">
+        <meta property="og:image" content="">
+        <meta property="og:image:width" content="343">
+        <meta property="og:image:height" content="208">
+        <meta property="og:twitter:card" content="summary_large_image">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../images/favicon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../css/style.css" rel="stylesheet">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script>
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper">
+            <aside class="frame-article-left">
+                <iframe src="../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle">
+                <p class="tag">&ensp;Python&ensp;</p>
+                <h1>オブジェクトのシリアライズ（直列化）とは</h1>
+                <p class="topic-date">2024/</p>
+                <img class="big-image" src="" alt="">
+
+                <p>
+                    業務でゲームエンジン絡みのトラブルシューティングをするためにデータの中身を解析する機会が少なくないのですが、「バイト列」なるものに出くわしたので
+                    備忘録を兼ねてPythonを活用した<strong>シリアライズ</strong> についてまとめようと思います。<br>
+                </p>
+                <p style="color: gray;">
+                    (※筆者の本職はCGデザイナーですので、内容の誤りがある可能性についてはご容赦下さい。)
+                </p>
+
+                <h2 id="title-01">シリアライズとは</h2>
+                <p>
+                    「serialize」という言葉には、<strong>順番に並べる</strong> という意味合いがあるそうです。<br>
+                    その名の通り、プログラミングにおけるシリアライズとは、<strong>メモリ上に展開されているオブジェクトを一列のバイト列に直列化すること</strong> を指します。<br><br>
+                    メモリ上に展開されたオブジェクトはライフサイクルを終えるとメモリから削除されてしまいますが、シリアライズすることで半永久的にオブジェクトの状態をファイルとして保存しておくことができます。<br><br>
+                    シリアライズされたオブジェクトは、デシリアライズすることで元の状態に復元することができます。
+                </p>
+
+                <h2 id="title-02">シリアライズは何に使う？</h2>
+                <p><strong>データをバイト列に変換して保存できる</strong> という利点を活かして、以下のような場面でシリアライズが活用されます。</p>
+                <ul>
+                    <li>オブジェクトの状態をファイルとして保存する(データの永続化)</li>
+                    <li>ネットワーク経由のデータの送受信</li>
+                    <li>JSONなどのテキストデータへの変換</li>
+                </ul>
+                <p>ただし、複雑なデータ構造のオブジェクトほど シリアライズした際のファイルサイズは大きくなるので、必要な個所に限定した利用が好ましいでしょう。</p>
+
+                <h2 id="title-03">Pythonでのシリアライズ</h2>
+                <p>
+                    Pythonにはシリアライズ用の標準モジュールとして、テキスト形式のJSONファイルに変換する <code>json</code> と、
+                    バイト列に変換する <code>pickle</code> モジュールが提供されています。<br><br>
+                </p>
+                <h3>jsonとpickleの比較</h3>
+                <p>両者には以下のようなメリット・デメリットがあります。</p>
+                <ul>
+                    <li>jsonは人間が読める形式だが、pickleは判読不可</li>
+                    <li>jsonはPython以外でも利用できる汎用フォーマット</li>
+                    <li>pickleはPython固有</li>
+                    <li>pickleはjsonよりも扱えるPythonの組込み型が幅広い</li>
+                    <li>信頼できないpickleの復元は脆弱性がある</li>
+                    <li>jsonを復元するだけでは脆弱性は発生しない</li>
+                </ul>
+
+                <h3>pickle化できるもの</h3>
+                <p>pickleモジュールは、以下の型のオブジェクトをシリアライズすることができます。</p>
+                <ul>
+                    <li><code>None</code> <code>True</code> <code>False</code>
+                    などの組み込み定数</li>
+                    <li>整数、浮動小数、複素数</li>
+                    <li>文字列、バイト文字列、バイト配列</li>
+                    <li>タプル、リスト、集合、辞書 (要素はpickle化可能なオブジェクトのみ)</li>
+                    <li>モジュールのトップレベルで定義された関数、クラス</li>
+                </ul>
+                <p>関数やクラスをシリアライズできるという利点は大きいですね。</p>
+
+            </article>
+            <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01"> </a>
+                    
+                </div>
+                <div style="height: auto;"></div>
+            </aside>
+        </main>
+    
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+        </script>
+    
+    <footer>
+        <iframe src="../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>SlackAPI スコープまとめ - KM ENV TA BLOG</title>
+        <meta name="description" content="">
+        <meta property="og:title" content="SlackAPIのスコープまとめ - KM ENV TA BLOG">
+        <meta property="og:description" content="">
+        <meta property="og:site_name" content="KM ENV TA BLOG">
+        <meta property="og:type" content="article">
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:url" content="https://kaku-env.github.io/articles/">
+        <meta property="og:image" content="">
+        <meta property="og:image:width" content="343">
+        <meta property="og:image:height" content="208">
+        <meta property="og:twitter:card" content="summary_large_image">
+        <meta property="og:twitter:creator" content="@KmEnvTABlog">
+        <meta property="og:twitter:site" content="@KmEnvTABlog">
+
+        <!-- Favicon -->
+        <link rel="icon"  href="../../../images/favicon.ico">
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link href="../../../css/style.css" rel="stylesheet">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+                crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                crossorigin="anonymous"></script>
+        <!-- highlight.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    </head>
+    <header>
+        <iframe src="../../../header.html" id="header" frameborder="0" scrolling="no">
+        </iframe><!-- /#header -->
+    </header>
+    <body>
+        <main class="main-contents wrapper" style="max-width: 1600px;">
+            <aside class="frame-article-left">
+                <iframe src="../../../aside.html" id="aside" frameborder="0" scrolling="no">
+                </iframe><!-- /#aside -->
+            </aside>
+            <article class="frame-article-middle" style="width: 75%">
+                <p class="tag">&ensp;Slack&ensp;</p>
+                <h1>SlackAPI スコープまとめ</h1>
+                <p class="topic-date">2024/</p>
+                <img class="big-image" src="" alt="">
+
+                <h3>SlackAPIの「スコープ」とは</h3>
+                <p>WebAPIメソッドの呼び出しやEventAPIイベントの受信など、Slackで機能を実行する許可をアプリに与えるために使用される権限。</p>
+
+                <!-- ============================================================================================ -->
+                <h2>トークンタイプ一覧</h2>
+                <table border="1">
+                    <tr>
+                        <th>トークン</th>
+                        <th>接頭辞</th>
+                        <th>概要</th>
+                    </tr>
+                    <tr>
+                        <td>Botトークン</td>
+                        <td><code>xoxb-</code></td>
+                        <td>
+                            ユーザーIDに紐づかない独立したトークン。<br>
+                            必要なスコープのみを要求するため、カスタマイズ性の高い権限モデルを提供する。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Workflow<br>トークン</td>
+                        <td><code>xwfp-</code></td>
+                        <td>
+                            Botトークンのサブセット。 <br>
+                            発行後15分で失効するワンタイムトークン。<br>
+                            ユーザースコープを必要とするアクションを実行することはできない。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Userトークン</td>
+                        <td><code>xoxp-</code></td>
+                        <td>
+                            アプリをインストール、または認証したユーザーに発行される。<br>
+                            アプリケーションの場合、ユーザに代わってアクションを実行することが可能。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Configuration<br>トークン</td>
+                        <td>-</td>
+                        <td>
+                            アプリを作成および構成するために AppManifestAPI で使用されるワークスペースごとのトークン。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>App-level<br>トークン</td>
+                        <td><code>xapp-</code></td>
+                        <td>
+                            アプリがインストールされている組織全体で固有のトークン。<br>
+                            アプリ全体に関連する特定のAPIでのみ使用可能。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Service<br>トークン</td>
+                        <td>-</td>
+                        <td>
+                            有効期限がなく、トークンをリフレッシュすることなくSlack CLIのあらゆるアクションを実行可能。<br>
+                            WorkflowAppsでのみ使用可。
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- ============================================================================================ -->
+                <h2>スコープ一覧</h2>
+
+                 <table class="left-aligned-table border-table">
+                     <tr>
+                         <th>スコープ名</th>
+                        <th>概要</th>
+                        <th>トークンタイプ</th>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/admin.html">admin</a></td>
+                        <td><p>ワークスペースの管理者権限</p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/admin-analytics-read.html">admin.analytics:read</a></td>
+                        <td><p>組織に関する分析データへのアクセス権限</p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.app_activates:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.apps:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.apps:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.barriers:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.barriers:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.conversions:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.conversions:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.invites:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.invites:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.roles:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.roles:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.teams:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.teams:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.usergroups:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.usergroups:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.users:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.users:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.workflows:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">admin.workflows:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">app_configurations:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code><br><code>Configurations</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">app_configurations:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">app_mentions:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">apps.requests:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">assistant:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">auditlogs:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">authorizations:read</a></td>
+                        <td><p></p></td>
+                        <td><code>AppLevel</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">bookmarks:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">bookmarks:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">calls:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">calls:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">canvases:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">canvases:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">channels:history</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">channels:join</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">channels:manage</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">channels:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">channels:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">channels:write.invites</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">channels:write.topic</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/chat-write.html">chat:write</a></td>
+                        <td><p>承認されたチャンネルと会話にメッセージを投稿する</p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">chat:write.customize</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">chat:write.public</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">chat:write:bot</a></td>
+                        <td><p>Slackアプリとしてメッセージを送る</p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">chat:write:user</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">commands</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">connections:write</a></td>
+                        <td><p></p></td>
+                        <td><code>AppLevel</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">conversations.connect:manage</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">conversations.connect:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">conversations.connect:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">conversations:write.invites</a></td>
+                        <td><p></p></td>
+                        <td><p>-</p></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">conversations:write.topic</a></td>
+                        <td><p></p></td>
+                        <td><p>-</p></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">datastore:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">datastore:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">dnd:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">dnd:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">email</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">emoji:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">files:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">files:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">files:write:user</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">groups:history</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">groups:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">groups:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">groups:write.invites</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">groups:write.topic</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">hosting:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">hosting:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">identify</a></td>
+                        <td><p></p></td>
+                        <td><p>-</p></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">im:history</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">im:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">im:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">im:write.topic</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">incoming-webhook</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">links.embed:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">links:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">links:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">metadata.messages:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">mpim:history</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">mpim:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">mpim:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">mpim:write.invites</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">mpim:write.topic</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">none</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">openid</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">pins:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">pins:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">profile</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">reactions:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">reactions:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">reminders:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">reminders:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">remote_files:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">remote_files:share</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">remote_files:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code>></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">search:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">search:read.im</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">search:read.mpim</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">search:read.private</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">search:read.public</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">stars:read</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">stars:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">team.billing:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">team.preferences:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">team:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">tokens.basic</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">triggers:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">triggers:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">usergroups:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">usergroups:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">users.profile:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">users.profile:write</a></td>
+                        <td><p></p></td>
+                        <td><code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">users:read</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">users:read.email</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">users:write</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code> <code>User</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./scopes/_temp.html">aworkflow.steps:execute</a></td>
+                        <td><p></p></td>
+                        <td><code>Bot</code></td>
+                    </tr>
+                </table>
+ 
+            </article>
+            <!-- <aside class="frame-article-right">
+                <div id="article-index">
+                    <p id="index-title">IN THIS PAGE</p>
+                    <a href="#title-01"> admin</a>
+                    <a href="#title-02"> admin.analytics:read</a>
+                    
+                </div>
+                <div style="height: auto;"></div>
+            </aside> -->
+        </main>
+    
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+
+    <!-- 目次ハイライト -->
+    <script src="../../../js/current_header.js"></script>
+    <!-- ページ内リンクオフセット -->
+    <script>
+        $(document).ready(function() {
+            $('a').click(function() {
+              var target = $(this.hash);
+              var offset = 50;
+          
+              $('html, body').animate({
+                scrollTop: target.offset().top - offset
+              }, 500);
+            });
+          });
+        </script>
+    
+    <footer>
+        <iframe src="../../../footer.html" id="footer" frameborder="0" scrolling="no">
+        </iframe><!-- /#footer -->
+    </footer>
+</html>
